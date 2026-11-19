@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Compêndio do Mestre</title>
+<link href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#121316;--panel:#1a1c20;--panel2:#24272d;--ink:#e6e8ec;--mute:#8f96a3;--acc:#6ea8fe;--acc2:#3b6cb7;--line:#2e323a;--zebra:rgba(255,255,255,.03)}
+:root.light{--bg:#f4f5f7;--panel:#ffffff;--panel2:#e9ecef;--ink:#1b1e24;--mute:#5f6775;--acc:#1d5bbf;--acc2:#2b6cb0;--line:#d5d9e0;--zebra:rgba(0,0,0,.03)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 'Quantico',sans-serif;height:100vh;display:flex;flex-direction:column}
+header{display:flex;gap:10px;align-items:center;padding:10px 14px;background:var(--panel);border-bottom:2px solid var(--acc2)}
+header h1{font-size:18px;margin:0;color:var(--acc);letter-spacing:.5px;white-space:nowrap}
+#q{flex:1;min-width:120px;padding:8px 10px;background:var(--bg);border:1px solid var(--line);color:var(--ink);border-radius:6px;font:inherit}
+#theme,#toggle-nav{padding:7px 10px;background:var(--bg);border:1px solid var(--line);color:var(--ink);border-radius:6px;font:inherit;cursor:pointer;white-space:nowrap}
+#theme:hover,#toggle-nav:hover{background:var(--panel2)}
+body.nav-collapsed nav{display:none}
+main{flex:1;display:flex;min-height:0}
+nav{width:300px;background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
+.tabs{display:flex}
+.tabs button{flex:1;border:0;border-bottom:2px solid transparent;background:none;color:var(--ink);font:inherit;padding:10px 4px;cursor:pointer}
+.tabs button.on{border-bottom-color:var(--acc);color:var(--acc)}
+.filters{padding:8px;display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--line);font-size:13px}
+.filters select,.filters label{background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:5px;padding:4px;max-width:100%;display:flex;align-items:center;gap:4px;cursor:pointer}
+#list{overflow:auto;flex:1;padding:0 0 4px}
+#list .grp{padding:6px 12px;color:var(--acc);font-size:12px;text-transform:uppercase;letter-spacing:1px;background:var(--bg);position:sticky;top:0;z-index:1}
+#list a{display:flex;justify-content:space-between;gap:8px;padding:6px 14px;color:var(--ink);cursor:pointer;border-left:3px solid transparent}
+#list a:hover{background:var(--panel2)}
+#list a.on{background:var(--panel2);border-left-color:var(--acc)}
+#list small{color:var(--mute);white-space:nowrap}
+.count{padding:6px 12px;color:var(--mute);font-size:12px;border-top:1px solid var(--line)}
+section{flex:1;overflow:auto;padding:22px 32px}
+.card{max-width:820px;margin:0 auto}
+h2{color:var(--acc);margin:0 0 4px;font-size:28px}
+.sub{color:var(--mute);font-style:italic;margin-bottom:14px}
+.badge{display:inline-block;padding:1px 8px;border-radius:10px;background:var(--acc2);font-size:12px;margin-left:8px;vertical-align:middle;color:#fff}
+dl{display:grid;grid-template-columns:max-content 1fr;gap:0;margin:12px 0;padding:0;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+dt{color:var(--acc);font-weight:bold;padding:10px 14px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);background:var(--zebra)}
+dd{margin:0;padding:10px 14px;border-bottom:1px solid var(--line)}
+dl dt:last-of-type, dl dd:last-of-type{border-bottom:none}
+.txt h4{color:var(--acc);margin:18px 0 4px;font-size:17px;border-bottom:1px solid var(--line)}
+.txt p{margin:6px 0;text-align:justify}
+.txt ul{margin:6px 0 6px 20px;padding:0;text-align:justify}
+.txt li{margin:3px 0}
+.txt table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:var(--panel);border:1px solid var(--line)}
+.txt th,.txt td{padding:7px 10px;text-align:center;border:1px solid var(--line)}
+.txt th{color:var(--acc);background:var(--panel2);font-weight:bold}
+.txt tr:nth-child(even) td{background:var(--zebra)}
+.copy-btn{float:right;background:var(--panel2);border:1px solid var(--line);color:var(--ink);padding:6px 12px;border-radius:6px;cursor:pointer;font:inherit;font-size:13px}
+.copy-btn:hover{background:var(--acc);color:#fff}
+.dice{color:var(--acc);cursor:pointer;border-bottom:1px dashed var(--acc);font-weight:bold}
+.dice:hover{background:rgba(110,168,254,0.15)}
+
+#dice-box{position:fixed;bottom:25px;right:25px;background:var(--panel);border:1px solid var(--acc);color:var(--ink);padding:14px 18px;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,0.4);z-index:999;display:none;min-width:220px;font-size:14px}
+#dice-box.show{display:block}
+#dice-box .dice-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;color:var(--acc);font-weight:bold}
+#dice-box .close-btn{background:none;border:0;color:var(--mute);cursor:pointer;font-size:16px;padding:0}
+#dice-box .close-btn:hover{color:var(--ink)}
+
+.home .tile{display:inline-block;margin:6px;padding:14px 22px;background:var(--panel);border:1px solid var(--line);border-radius:8px;cursor:pointer}
+.home .tile b{display:block;font-size:24px;color:var(--acc)}
+.hint{color:var(--mute);font-size:13px}
+.warn{background:var(--panel);border:1px solid var(--acc2);padding:10px 14px;border-radius:8px;margin:10px 0}
+@media(max-width:760px){main{flex-direction:column}nav{width:100%;height:45vh}section{padding:14px}}
+</style>
+</head>
+<body>
+<header>
+  <button id="toggle-nav" title="Retrair/Expandir lista">☰</button>
+  <h1>⚔ Compêndio do Mestre</h1>
+  <input id="q" placeholder="Buscar em tudo… (atalho: / ou Ctrl+K)">
+  <button id="theme" title="Alternar tema">☀ Claro</button>
+</header>
+<main>
+  <nav>
+    <div class="tabs" id="tabs"></div>
+    <div class="filters" id="filters"></div>
+    <div id="list"></div>
+    <div class="count" id="count"></div>
+  </nav>
+  <section id="view"></section>
+</main>
+
+<div id="dice-box">
+  <div class="dice-header">
+    <span id="dice-title">🎲 Resultado</span>
+    <button class="close-btn" onclick="closeDiceBox()">✕</button>
+  </div>
+  <div id="dice-content"></div>
+</div>
+<div id="toast"></div>
+
+<!-- Dados: ficam na mesma pasta deste arquivo -->
+<script src="racas.js"></script>
+<script src="classes.js"></script>
+<script src="magias.js"></script>
+
+<script>
+const ESCOLAS=[...new Set((window.MAGIAS||[]).map(m=>m.escola).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"pt-BR"));
+const CLASSES=[...new Set((window.CLASSES_DATA||[]).map(c=>c.nome).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"pt-BR"));
+
+const TYPES={
+ raca:{label:"Raças",one:"Raça",file:"racas.js",fields:[
+  ["tamanho","Tamanho","meta"],["deslocamento","Deslocamento","meta"],["atributos","Aumento de atributos","meta"],
+  ["idade","Idade","meta"],["tendencia","Tendência","meta"],["idiomas","Idiomas","meta"],
+  ["tracos","Traços raciais","texto"],["subracas","Sub-raças","texto"],["notas","Notas","texto"]]},
+ classe:{label:"Classes",one:"Classe",file:"classes.js",fields:[
+  ["dado","Dado de Vida","meta"],["primaria","Habilidade primária","meta"],["resist","Testes de resistência","meta"],
+  ["armaduras","Armaduras","meta"],["armas","Armas","meta"],["pericias","Perícias","meta"],["conj","Habilidade de conjuração","meta"],
+  ["tabela","Tabela de progressão","texto"],["caract","Características de classe","texto"],["subclasses_detalhadas","Subclasses Detalhadas","texto"]]},
+ magia:{label:"Magias",one:"Magia",file:"magias.js",fields:[
+  ["tempo","Tempo de conjuração","meta"],["alcance","Alcance","meta"],["comp","Componentes","meta"],["duracao","Duração","meta"],["classes","Classes","meta"],
+  ["texto","Descrição","texto"],["niveis","Em níveis superiores","texto"]]}
+};
+const SOURCES={raca:"RACAS",classe:"CLASSES_DATA",magia:"MAGIAS"};
+
+const db=[];const missing=[];
+for(const [t,v] of Object.entries(SOURCES)){
+  const arr=window[v];
+  if(!Array.isArray(arr)){missing.push(TYPES[t].file);continue}
+  arr.forEach((e,i)=>db.push({id:t+"-"+i,type:t,...e}));
+}
+
+let ui={tab:"raca",sel:null,q:"",f:{nivel:"",escola:"",classe:"",ritual:false,concentracao:false,hb:""}};
+const $=s=>document.querySelector(s);
+
+function saveState(){
+  try{
+    const cur=db.find(x=>x.id===ui.sel);
+    sessionStorage.setItem("comp_state",JSON.stringify({
+      tab:ui.tab,
+      sel:ui.sel,
+      selName:cur?cur.nome:null
+    }));
+  }catch(e){}
+}
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+
+function showToast(msg){
+  let t=$("#toast");
+  if(!t){t=document.createElement("div");t.id="toast";document.body.appendChild(t);}
+  t.textContent=msg;t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),2500);
+}
+
+function rollDice(expr){
+  const clean=expr.replace(/\s+/g,"");
+  const match=clean.match(/^(\d+)d(\d+)([+-]\d+)?$/i);
+  if(!match)return;
+  const count=parseInt(match[1]);
+  const sides=parseInt(match[2]);
+  const mod=match[3]?parseInt(match[3]):0;
+  let total=mod;
+  let rolls=[];
+  for(let i=0;i<count;i++){
+    const r=Math.floor(Math.random()*sides)+1;
+    rolls.push(r);
+    total+=r;
+  }
+  $("#dice-title").textContent=`🎲 Rolagem: ${expr}`;
+  $("#dice-content").innerHTML=`<b>Dados:</b> [${rolls.join(", ")}]<br><b>Modificador:</b> ${mod>=0?(mod?'+'+mod:0):mod}<br><b>Total: <span style="color:var(--acc);font-size:18px">${total}</span></b>`;
+  $("#dice-box").classList.add("show");
+}
+
+function closeDiceBox(){
+  $("#dice-box").classList.remove("show");
+}
+
+function md(t){
+  if(!t||!String(t).trim())return "";
+  const fmt=s=>esc(s)
+    .replace(/\*\*(.+?)\*\*/g,"<b>$1</b>")
+    .replace(/\*(.+?)\*/g,"<i>$1</i>")
+    .replace(/(\d+d\d+(?:\s*[+-]\s*\d+)?)/gi,'<span class="dice" onclick="rollDice(\'$1\')">$1</span>');
+
+  return String(t).split(/\n{2,}/).map(p=>{
+    const lines=p.trim().split("\n");
+    if(lines.length>=2&&lines[0].includes("|")&&/^\|?[\s:-]+\|/.test(lines[1])){
+      const cells=r=>r.replace(/^\||\|$/g,"").split("|").map(c=>fmt(c.trim()));
+      const th=cells(lines[0]).map(c=>`<th>${c}</th>`).join("");
+      const tb=lines.slice(2).filter(r=>r.trim()).map(r=>`<tr>${cells(r).map(c=>`<td>${c}</td>`).join("")}</tr>`).join("");
+      return `<table><thead><tr>${th}</tr></thead><tbody>${tb}</tbody></table>`;
+    }
+    if(lines.every(l=>/^[-*]\s/.test(l.trim()))){
+      const items=lines.map(l=>`<li>${fmt(l.replace(/^[-*]\s+/,""))}</li>`).join("");
+      return `<ul>${items}</ul>`;
+    }
+    const h=fmt(p).replace(/\n/g,"<br>");
+    return /^#{1,3} /.test(h)?`<h4>${h.replace(/^#+ /,"")}</h4>`:`<p>${h}</p>`;
+  }).join("");
+}
+
+const entriesOf=t=>db.filter(e=>e.type===t);
+const haystack=e=>norm([e.nome,e.sinonimos].filter(Boolean).join(" "));
+
+function filtered(){
+  const q=norm(ui.q),global=q.length>0;
+  let L=db.filter(e=>global||e.type===ui.tab);
+  if(global)L=L.filter(e=>haystack(e).includes(q));
+  else if(ui.tab==="magia"){
+    const f=ui.f;
+    if(f.nivel!=="")L=L.filter(e=>String(e.nivel??"")===f.nivel);
+    if(f.escola)L=L.filter(e=>e.escola===f.escola);
+    if(f.classe)L=L.filter(e=>norm(e.classes).includes(norm(f.classe)));
+    if(f.ritual)L=L.filter(e=>e.ritual);
+    if(f.concentracao)L=L.filter(e=>e.concentracao);
+    if(f.hb==="oficial")L=L.filter(e=>!e.hb);
+    if(f.hb==="hb")L=L.filter(e=>e.hb);
+  }
+  return L.sort((a,b)=>{
+    if(!global&&ui.tab==="magia"){const d=(+a.nivel||0)-(+b.nivel||0);if(d)return d}
+    return a.nome.localeCompare(b.nome,"pt-BR");
+  });
+}
+
+function renderTabs(){
+  $("#tabs").innerHTML=Object.entries(TYPES).map(([k,v])=>
+    `<button data-t="${k}" class="${ui.tab===k&&!ui.q?'on':''}">${v.label} (${entriesOf(k).length})</button>`).join("");
+  $("#tabs").querySelectorAll("button").forEach(b=>b.onclick=()=>{
+    ui.tab=b.dataset.t;
+    ui.q="";
+    $("#q").value="";
+    ui.sel=null;
+    history.replaceState(null,"",location.pathname+location.search);
+    saveState();
+    render();
+  });
+}
+
+function renderFilters(){
+  const el=$("#filters");
+  if(ui.q||ui.tab!=="magia"){el.style.display="none";return}
+  el.style.display="flex";
+  const f=ui.f;
+  el.innerHTML=`
+   <select id="fn"><option value="">Todo nível</option>${[0,1,2,3,4,5,6,7,8,9].map(n=>`<option value="${n}" ${f.nivel===String(n)?'selected':''}>${n===0?'Truques':n+'º nível'}</option>`).join("")}</select>
+   <select id="fe"><option value="">Toda escola</option>${ESCOLAS.map(s=>`<option ${f.escola===s?'selected':''}>${s}</option>`).join("")}</select>
+   <select id="fc"><option value="">Toda classe</option>${CLASSES.map(s=>`<option ${f.classe===s?'selected':''}>${s}</option>`).join("")}</select>
+   <label><input type="checkbox" id="fr" ${f.ritual?'checked':''}> Ritual</label>
+   <label><input type="checkbox" id="fco" ${f.concentracao?'checked':''}> Concentração</label>
+   <select id="fhb"><option value="">Todos</option><option value="oficial" ${f.hb==='oficial'?'selected':''}>Oficiais</option><option value="hb" ${f.hb==='hb'?'selected':''}>Homebrew</option></select>`;
+  
+  $("#fn").onchange=e=>{ui.f.nivel=e.target.value;renderList()};
+  $("#fe").onchange=e=>{ui.f.escola=e.target.value;renderList()};
+  $("#fc").onchange=e=>{ui.f.classe=e.target.value;renderList()};
+  $("#fr").onchange=e=>{ui.f.ritual=e.target.checked;renderList()};
+  $("#fco").onchange=e=>{ui.f.concentracao=e.target.checked;renderList()};
+  $("#fhb").onchange=e=>{ui.f.hb=e.target.value;renderList()};
+}
+
+function renderList(){
+  const L=filtered(),global=!!ui.q;
+  let html="",last=null;
+  for(const e of L){
+    let g;
+    if(global)g=TYPES[e.type].label;
+    else if(ui.tab==="magia")g=(+e.nivel||0)===0?"Truques":(+e.nivel)+"º nível";
+    else g=e.nome[0].toUpperCase();
+    if(g!==last){html+=`<div class="grp">${esc(g)}</div>`;last=g}
+    const side=e.type==="magia"?esc(e.escola||""):e.type==="classe"?esc(e.dado||""):"";
+    html+=`<a data-id="${e.id}" class="${ui.sel===e.id?'on':''}"><span>${esc(e.nome)}${e.hb?' <small>★</small>':''}</span><small>${side}</small></a>`;
+  }
+  $("#list").innerHTML=html||'<div class="grp">Nada encontrado</div>';
+  $("#list").querySelectorAll("a").forEach(a=>a.onclick=()=>{ui.sel=a.dataset.id;location.hash="#"+ui.sel;saveState();render()});
+  $("#count").textContent=`${L.length} entrada(s)`;
+}
+
+function copyCard(){
+  const e=db.find(x=>x.id===ui.sel);
+  if(!e)return;
+  const T=TYPES[e.type];
+  let text=`=== ${e.nome} ===\n`;
+  T.fields.forEach(([k,l,t])=>{
+    if(e[k] && String(e[k]).trim()){
+      if(t==="meta") text+=`${l}: ${e[k]}\n`;
+      else if(t==="texto") text+=`\n[ ${l} ]\n${e[k]}\n`;
+    }
+  });
+  navigator.clipboard.writeText(text.trim()).then(()=>showToast("📋 Texto copiado para a área de transferência!"));
+}
+
+function renderView(){
+  const v=$("#view");
+  const e=db.find(x=>x.id===ui.sel);
+  if(!e){
+    v.innerHTML=`<div class="card home"><h2>Compêndio do Mestre</h2>
+      <p class="sub">Escolha uma entrada ao lado ou use a busca no topo.</p>
+      ${missing.length?`<div class="warn">Não encontrei: <b>${missing.join(", ")}</b>. Coloque esses arquivos na mesma pasta do compendio.html.</div>`:""}
+      ${Object.entries(TYPES).map(([k,t])=>`<div class="tile" data-t="${k}"><b>${entriesOf(k).length}</b>${t.label}</div>`).join("")}
+      <p class="hint" style="margin-top:20px">Entradas com ★ são homebrew.</p></div>`;
+    v.querySelectorAll(".tile").forEach(t=>t.onclick=()=>{ui.tab=t.dataset.t;ui.q="";$("#q").value="";saveState();render()});
+    return;
+  }
+  const T=TYPES[e.type];
+  let sub=T.one;
+  if(e.type==="magia"){
+    const n=+e.nivel||0;
+    sub=`${n===0?"Truque":n+"º nível"} de ${e.escola||"-"}${e.ritual?" (ritual)":""}${e.concentracao?" · concentração":""}`;
+  }else if(e.resumo)sub=e.resumo;
+  const meta=T.fields.filter(([k,,t])=>t==="meta"&&e[k]);
+  const txt=T.fields.filter(([k,,t])=>t==="texto"&&e[k]&&String(e[k]).trim());
+  
+  let sinHtml = "";
+  if (e.sinonimos && String(e.sinonimos).trim()) {
+    sinHtml = `<div class="sub" style="margin-top:-6px; margin-bottom:14px; font-size:14px; color:var(--mute);">Outros nomes: ${String(e.sinonimos).split(';').map(s => s.trim()).filter(Boolean).map(s => `<i>${esc(s)}</i>`).join(' | ')}</div>`;
+  }
+
+  v.innerHTML=`<div class="card">
+   <button class="copy-btn" onclick="copyCard()">📋 Copiar</button>
+   <h2>${esc(e.nome)}${e.hb?'<span class="badge">homebrew</span>':''}</h2>
+   <div class="sub">${esc(sub)}</div>
+   ${sinHtml}
+   ${meta.length?`<dl>${meta.map(([k,l])=>`<dt>${l}</dt><dd>${esc(e[k])}</dd>`).join("")}</dl>`:""}
+   <div class="txt">${txt.map(([k,l])=>`<h4>${l}</h4>${md(e[k])}`).join("")}</div></div>`;
+  v.scrollTop=0;
+}
+
+const setNav=c=>{
+  document.body.classList.toggle("nav-collapsed",c);
+  localStorage.setItem("comp_nav",c?"1":"0");
+};
+setNav(localStorage.getItem("comp_nav")==="1");
+$("#toggle-nav").onclick=()=>setNav(!document.body.classList.contains("nav-collapsed"));
+
+const setTheme=l=>{
+  document.documentElement.classList.toggle("light",l);
+  $("#theme").textContent=l?"☾ Escuro":"☀ Claro";
+  localStorage.setItem("comp_theme",l?"light":"dark");
+};
+setTheme(localStorage.getItem("comp_theme")==="light");
+$("#theme").onclick=()=>setTheme(!document.documentElement.classList.contains("light"));
+
+$("#q").oninput=e=>{
+  ui.q=e.target.value;
+  if(ui.q&&document.body.classList.contains("nav-collapsed"))setNav(false);
+  renderTabs();renderFilters();renderList();
+};
+
+document.addEventListener("keydown",e=>{
+  const typing=/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
+  if((e.key==="/"&&!typing)||(e.ctrlKey&&e.key.toLowerCase()==="k")){e.preventDefault();$("#q").focus();$("#q").select()}
+  if(e.key==="Escape")$("#q").blur();
+  
+  if(!typing&&(e.key==="ArrowDown"||e.key==="ArrowUp")){
+    const L=filtered();if(!L.length)return;
+    e.preventDefault();
+    let i=L.findIndex(x=>x.id===ui.sel);
+    if(i===-1) i=0;
+    else i=e.key==="ArrowDown"?Math.min(L.length-1,i+1):Math.max(0,i-1);
+    ui.sel=L[i].id;
+    location.hash="#"+ui.sel;
+    saveState();
+    renderList();renderView();
+    const activeEl=$(`#list a[data-id="${ui.sel}"]`);
+    if(activeEl) activeEl.scrollIntoView({block:'nearest'});
+  }
+});
+
+window.onhashchange=()=>{const id=location.hash.slice(1),e=db.find(x=>x.id===id);if(e&&id!==ui.sel){ui.sel=id;ui.tab=e.type;saveState();render()}};
+function render(){renderTabs();renderFilters();renderList();renderView()}
+
+function loadState(){
+  let saved=null;
+  try{saved=JSON.parse(sessionStorage.getItem("comp_state"))}catch(e){}
+  if(saved){
+    if(saved.tab&&TYPES[saved.tab])ui.tab=saved.tab;
+    if(saved.sel){
+      let found=db.find(x=>x.id===saved.sel&&(!saved.selName||x.nome===saved.selName));
+      if(!found&&saved.selName)found=db.find(x=>x.type===ui.tab&&x.nome===saved.selName);
+      if(found){
+        ui.sel=found.id;
+        ui.tab=found.type;
+      }
+    }
+  }
+  if(!ui.sel){
+    const hashId=location.hash.slice(1);
+    if(hashId){
+      const hashEntry=db.find(x=>x.id===hashId);
+      if(hashEntry){
+        ui.sel=hashEntry.id;
+        ui.tab=hashEntry.type;
+      }
+    }
+  }
+  if(ui.sel&&location.hash!=="#"+ui.sel){
+    history.replaceState(null,"","#"+ui.sel);
+  }
+  render();
+  if(ui.sel){
+    const activeEl=$(`#list a[data-id="${ui.sel}"]`);
+    if(activeEl)activeEl.scrollIntoView({block:"nearest"});
+  }
+  saveState();
+}
+
+loadState();
+</script>
+</body>
+</html>
