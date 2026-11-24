@@ -22,7 +22,8 @@ nav{width:300px;background:var(--panel);border-right:1px solid var(--line);displ
 .tabs button{flex:1;border:0;border-bottom:2px solid transparent;background:none;color:var(--ink);font:inherit;padding:10px 4px;cursor:pointer}
 .tabs button.on{border-bottom-color:var(--acc);color:var(--acc)}
 .filters{padding:8px;display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--line);font-size:13px}
-.filters select,.filters label{background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:5px;padding:4px;max-width:100%;display:flex;align-items:center;gap:4px;cursor:pointer}
+.filters select,.filters label,.filters button{background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:5px;padding:4px 8px;max-width:100%;display:flex;align-items:center;gap:4px;cursor:pointer;font:inherit}
+.filters button.on{background:var(--acc2);border-color:var(--acc);color:#fff}
 #list{overflow:auto;flex:1;padding:0 0 4px}
 #list .grp{padding:6px 12px;color:var(--acc);font-size:12px;text-transform:uppercase;letter-spacing:1px;background:var(--bg);position:sticky;top:0;z-index:1}
 #list a{display:flex;justify-content:space-between;gap:8px;padding:6px 14px;color:var(--ink);cursor:pointer;border-left:3px solid transparent}
@@ -62,6 +63,12 @@ dl dt:last-of-type, dl dd:last-of-type{border-bottom:none}
 .home .tile b{display:block;font-size:24px;color:var(--acc)}
 .hint{color:var(--mute);font-size:13px}
 .warn{background:var(--panel);border:1px solid var(--acc2);padding:10px 14px;border-radius:8px;margin:10px 0}
+#order-warn{display:none;background:rgba(220,53,69,.15);border-bottom:2px solid #dc3545;color:var(--ink);padding:10px 16px;font-size:13px;max-height:150px;overflow:auto}
+#order-warn .ow-head{display:flex;justify-content:space-between;align-items:center;font-weight:bold;color:#ff6b6b;margin-bottom:4px}
+:root.light #order-warn .ow-head{color:#b02a37}
+#order-warn button{background:none;border:0;color:var(--ink);cursor:pointer;font-size:15px;padding:0 4px}
+#order-warn ul{margin:4px 0 0 18px;padding:0}
+#order-warn li{margin:2px 0}
 @media(max-width:760px){main{flex-direction:column}nav{width:100%;height:45vh}section{padding:14px}}
 </style>
 </head>
@@ -72,6 +79,7 @@ dl dt:last-of-type, dl dd:last-of-type{border-bottom:none}
   <input id="q" placeholder="Buscar em tudo… (atalho: / ou Ctrl+K)">
   <button id="theme" title="Alternar tema">☀ Claro</button>
 </header>
+<div id="order-warn"></div>
 <main>
   <nav>
     <div class="tabs" id="tabs"></div>
@@ -115,14 +123,39 @@ const TYPES={
 };
 const SOURCES={raca:"RACAS",classe:"CLASSES_DATA",magia:"MAGIAS"};
 
-const db=[];const missing=[];
+const db=[];const missing=[];const orderErrors=[];
 for(const [t,v] of Object.entries(SOURCES)){
   const arr=window[v];
   if(!Array.isArray(arr)){missing.push(TYPES[t].file);continue}
-  arr.forEach((e,i)=>db.push({id:t+"-"+i,type:t,...e}));
+  const named=arr.map((e,i)=>({e,i})).filter(x=>x.e&&x.e.nome);
+  const tails=[],prev=new Array(named.length).fill(-1);
+  for(let k=0;k<named.length;k++){
+    let lo=0,hi=tails.length;
+    while(lo<hi){
+      const mid=(lo+hi)>>1;
+      if(named[tails[mid]].e.nome.localeCompare(named[k].e.nome,"pt-BR")<=0)lo=mid+1;
+      else hi=mid;
+    }
+    if(lo>0)prev[k]=tails[lo-1];
+    tails[lo]=k;
+  }
+  const ok=new Set();
+  for(let k=tails.length?tails[tails.length-1]:-1;k>=0;k=prev[k])ok.add(named[k].i);
+  arr.forEach((e,i)=>{
+    if(e&&e.nome&&!ok.has(i)){
+      let depoisDe=null;
+      arr.forEach((x,j)=>{
+        if(j!==i&&x&&x.nome&&x.nome.localeCompare(e.nome,"pt-BR")<0){
+          if(!depoisDe||x.nome.localeCompare(depoisDe,"pt-BR")>0)depoisDe=x.nome;
+        }
+      });
+      orderErrors.push({file:TYPES[t].file,pos:i+1,atual:e.nome,depoisDe});
+    }
+    db.push({id:t+"-"+i,type:t,...e});
+  });
 }
 
-let ui={tab:"raca",sel:null,q:"",f:{nivel:"",escola:"",classe:"",ritual:false,concentracao:false,hb:""}};
+let ui={tab:"raca",sel:null,q:"",f:{nivel:"",escola:"",classe:"",opcional:false,ritual:false,concentracao:false,hb:"",ordem:localStorage.getItem("comp_ordem")||"nivel"}};
 const $=s=>document.querySelector(s);
 
 function saveState(){
@@ -137,6 +170,29 @@ function saveState(){
 }
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const norm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+const CLASS_MAP={artificer:"Artífice",barbarian:"Bárbaro",bard:"Bardo",cleric:"Clérigo",druid:"Druida",fighter:"Guerreiro",monk:"Monge",paladin:"Paladino",ranger:"Patrulheiro",rogue:"Ladino",sorcerer:"Feiticeiro",warlock:"Bruxo",wizard:"Mago"};
+(window.CLASSES_DATA||[]).forEach(c=>{
+  if(!c||!c.nome)return;
+  CLASS_MAP[norm(c.nome)]=c.nome;
+  String(c.sinonimos||"").split(/[;,]/).map(s=>s.trim()).filter(Boolean).forEach(s=>{
+    CLASS_MAP[norm(s)]=c.nome;
+  });
+});
+function parseClasses(str){
+  return String(str||"").split(",").map(part=>part.trim()).filter(Boolean).map(part=>{
+    const m=part.match(/^(.+?)(\s*\((?:opcional|optional)\))?$/i);
+    const raw=m?m[1].trim():part;
+    const opt=Boolean(m&&m[2]);
+    const nome=CLASS_MAP[norm(raw)]||raw;
+    return {nome,opt};
+  });
+}
+function formatClasses(str){
+  return parseClasses(str)
+    .sort((a,b)=>a.nome.localeCompare(b.nome,"pt-BR"))
+    .map(c=>c.opt?`${c.nome} (Opcional)`:c.nome)
+    .join(", ");
+}
 
 function showToast(msg){
   let t=$("#toast");
@@ -203,14 +259,14 @@ function filtered(){
     const f=ui.f;
     if(f.nivel!=="")L=L.filter(e=>String(e.nivel??"")===f.nivel);
     if(f.escola)L=L.filter(e=>e.escola===f.escola);
-    if(f.classe)L=L.filter(e=>norm(e.classes).includes(norm(f.classe)));
+    if(f.classe)L=L.filter(e=>parseClasses(e.classes).some(c=>norm(c.nome)===norm(f.classe)&&(f.opcional||!c.opt)));
     if(f.ritual)L=L.filter(e=>e.ritual);
     if(f.concentracao)L=L.filter(e=>e.concentracao);
     if(f.hb==="oficial")L=L.filter(e=>!e.hb);
     if(f.hb==="hb")L=L.filter(e=>e.hb);
   }
   return L.sort((a,b)=>{
-    if(!global&&ui.tab==="magia"){const d=(+a.nivel||0)-(+b.nivel||0);if(d)return d}
+    if(!global&&ui.tab==="magia"&&ui.f.ordem!=="alfa"){const d=(+a.nivel||0)-(+b.nivel||0);if(d)return d}
     return a.nome.localeCompare(b.nome,"pt-BR");
   });
 }
@@ -238,16 +294,20 @@ function renderFilters(){
    <select id="fn"><option value="">Todo nível</option>${[0,1,2,3,4,5,6,7,8,9].map(n=>`<option value="${n}" ${f.nivel===String(n)?'selected':''}>${n===0?'Truques':n+'º nível'}</option>`).join("")}</select>
    <select id="fe"><option value="">Toda escola</option>${ESCOLAS.map(s=>`<option ${f.escola===s?'selected':''}>${s}</option>`).join("")}</select>
    <select id="fc"><option value="">Toda classe</option>${CLASSES.map(s=>`<option ${f.classe===s?'selected':''}>${s}</option>`).join("")}</select>
+   <button type="button" id="fop" class="${f.opcional?'on':''}" title="Incluir magias opcionais no filtro de classe">Opcionais</button>
    <label><input type="checkbox" id="fr" ${f.ritual?'checked':''}> Ritual</label>
    <label><input type="checkbox" id="fco" ${f.concentracao?'checked':''}> Concentração</label>
-   <select id="fhb"><option value="">Todos</option><option value="oficial" ${f.hb==='oficial'?'selected':''}>Oficiais</option><option value="hb" ${f.hb==='hb'?'selected':''}>Homebrew</option></select>`;
+   <select id="fhb"><option value="">Todos</option><option value="oficial" ${f.hb==='oficial'?'selected':''}>Oficiais</option><option value="hb" ${f.hb==='hb'?'selected':''}>Homebrew</option></select>
+   <select id="ford"><option value="nivel" ${f.ordem!=='alfa'?'selected':''}>Ordem: Nível</option><option value="alfa" ${f.ordem==='alfa'?'selected':''}>Ordem: A-Z</option></select>`;
   
   $("#fn").onchange=e=>{ui.f.nivel=e.target.value;renderList()};
   $("#fe").onchange=e=>{ui.f.escola=e.target.value;renderList()};
   $("#fc").onchange=e=>{ui.f.classe=e.target.value;renderList()};
+  $("#fop").onclick=()=>{ui.f.opcional=!ui.f.opcional;$("#fop").classList.toggle("on",ui.f.opcional);renderList()};
   $("#fr").onchange=e=>{ui.f.ritual=e.target.checked;renderList()};
   $("#fco").onchange=e=>{ui.f.concentracao=e.target.checked;renderList()};
   $("#fhb").onchange=e=>{ui.f.hb=e.target.value;renderList()};
+  $("#ford").onchange=e=>{ui.f.ordem=e.target.value;localStorage.setItem("comp_ordem",ui.f.ordem);renderList()};
 }
 
 function renderList(){
@@ -256,10 +316,10 @@ function renderList(){
   for(const e of L){
     let g;
     if(global)g=TYPES[e.type].label;
-    else if(ui.tab==="magia")g=(+e.nivel||0)===0?"Truques":(+e.nivel)+"º nível";
+    else if(ui.tab==="magia"&&ui.f.ordem!=="alfa")g=(+e.nivel||0)===0?"Truques":(+e.nivel)+"º nível";
     else g=e.nome[0].toUpperCase();
     if(g!==last){html+=`<div class="grp">${esc(g)}</div>`;last=g}
-    const side=e.type==="magia"?esc(e.escola||""):e.type==="classe"?esc(e.dado||""):"";
+    const side=e.type==="magia"?(ui.f.ordem==="alfa"&&!global?esc(`${(+e.nivel||0)===0?"Truque":(+e.nivel)+"º"} · ${e.escola||""}`):esc(e.escola||"")):e.type==="classe"?esc(e.dado||""):"";
     html+=`<a data-id="${e.id}" class="${ui.sel===e.id?'on':''}"><span>${esc(e.nome)}${e.hb?' <small>★</small>':''}</span><small>${side}</small></a>`;
   }
   $("#list").innerHTML=html||'<div class="grp">Nada encontrado</div>';
@@ -274,8 +334,9 @@ function copyCard(){
   let text=`=== ${e.nome} ===\n`;
   T.fields.forEach(([k,l,t])=>{
     if(e[k] && String(e[k]).trim()){
-      if(t==="meta") text+=`${l}: ${e[k]}\n`;
-      else if(t==="texto") text+=`\n[ ${l} ]\n${e[k]}\n`;
+      const val=k==="classes"?formatClasses(e[k]):e[k];
+      if(t==="meta") text+=`${l}: ${val}\n`;
+      else if(t==="texto") text+=`\n[ ${l} ]\n${val}\n`;
     }
   });
   navigator.clipboard.writeText(text.trim()).then(()=>showToast("📋 Texto copiado para a área de transferência!"));
@@ -312,7 +373,7 @@ function renderView(){
    <h2>${esc(e.nome)}${e.hb?'<span class="badge">homebrew</span>':''}</h2>
    <div class="sub">${esc(sub)}</div>
    ${sinHtml}
-   ${meta.length?`<dl>${meta.map(([k,l])=>`<dt>${l}</dt><dd>${esc(e[k])}</dd>`).join("")}</dl>`:""}
+   ${meta.length?`<dl>${meta.map(([k,l])=>`<dt>${l}</dt><dd>${esc(k==="classes"?formatClasses(e[k]):e[k])}</dd>`).join("")}</dl>`:""}
    <div class="txt">${txt.map(([k,l])=>`<h4>${l}</h4>${md(e[k])}`).join("")}</div></div>`;
   v.scrollTop=0;
 }
@@ -389,11 +450,19 @@ function loadState(){
     history.replaceState(null,"","#"+ui.sel);
   }
   render();
+  renderOrderWarn();
   if(ui.sel){
     const activeEl=$(`#list a[data-id="${ui.sel}"]`);
     if(activeEl)activeEl.scrollIntoView({block:"nearest"});
   }
   saveState();
+}
+
+function renderOrderWarn(){
+  const el=$("#order-warn");
+  if(!el||!orderErrors.length)return;
+  el.innerHTML=`<div class="ow-head"><span>⚠ Fora de ordem alfabética nos arquivos (${orderErrors.length}):</span><button onclick="document.getElementById('order-warn').style.display='none'">✕</button></div><ul>${orderErrors.map(o=>`<li><b>${esc(o.file)}</b> (item #${o.pos}): <b>"${esc(o.atual)}"</b> está no lugar errado, ele deveria estar ${o.depoisDe?`após <b>"${esc(o.depoisDe)}"</b>`:`no início do arquivo`}, avise Éricles</li>`).join("")}</ul>`;
+  el.style.display="block";
 }
 
 loadState();

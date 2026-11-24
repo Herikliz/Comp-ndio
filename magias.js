@@ -1,20 +1,3 @@
-/* MAGIAS.JS
-   Cada magia é um objeto. Campos:
-     nome, hb (true = homebrew ★)
-     nivel      número de 0 (truque) a 9
-     escola     Abjuração, Adivinhação, Conjuração, Encantamento, Evocação, Ilusão, Necromancia ou Transmutação
-     ritual, concentracao   true ou omitir
-     classes    texto, ex.: "Mago, Feiticeiro, Bruxo"  (os filtros usam este campo)
-     tempo, alcance, comp, duracao
-     texto      descrição
-     niveis     efeito em níveis superiores
-   Nos campos de texto longo: linha em branco = novo parágrafo, **negrito**, *itálico*.
-
-   Modelo para copiar:
-   {nome:"Nome", hb:true, nivel:1, escola:"Evocação", classes:"Mago",
-    tempo:"1 ação", alcance:"9 metros", comp:"V, S", duracao:"Instantânea",
-    texto:"", niveis:""},
-*/
 window.MAGIAS = [
   {
     nome: "Abraço Terrestre de Maximillian",
@@ -63,7 +46,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 2,
     escola: "Encantamento",
-    classes: "Feiticeiro, Bruxo, Mago",
+    classes: "Feiticeiro (Opcional), Mago (Opcional)",
     tempo: "1 ação",
     alcance: "27 metros",
     comp: "V",
@@ -78,7 +61,7 @@ window.MAGIAS = [
     nivel: 4,
     escola: "Adivinhação",
     ritual: true,
-    classes: "Clérigo",
+    classes: "Clérigo, Druida (Opcional), Mago (Opcional)",
     tempo: "1 ação",
     alcance: "Pessoal",
     comp: "V, S, M (incenso e uma oferenda apropriada para sacrifício à sua religião, juntos valendo, no mínimo, 25 po, consumidos pela magia)",
@@ -183,6 +166,21 @@ window.MAGIAS = [
     texto: "Você assume uma forma diferente. Quando conjurar essa magia, escolha uma das seguintes opções, o efeito durará pela duração da magia. Enquanto a magia durar, você pode terminar uma opção com uma ação para ganhar os benefícios de uma diferente.\n\n**Adaptação Aquática.** Você adapta seu corpo para um ambiente aquático, brotando guelras e crescendo membranas entre seus dedos. Você pode respirar embaixo d'água e ganha deslocamento de natação igual a seu deslocamento terrestre.\n\n**Mudar Aparência.** Você transforma sua aparência. Você decide com o que você parece, incluindo altura, peso, traços faciais, timbre da sua voz, comprimento do cabelo, coloração e características distintas, se tiverem. Você pode ficar parecido com um membro de outra raça, apesar de nenhuma de suas estatísticas mudar. Você também não pode parecer com uma criatura de um tamanho diferente do seu, e seu formato básico permanece o mesmo; se você for bípede, você não pode usar essa magia para se tornar quadrúpede, por exemplo. A qualquer momento, pela duração da magia, você pode usar sua ação para mudar sua aparência dessa forma, novamente.\n\n**Armas Naturais.** Você faz crescerem garras, presas, espinhos, chifres ou armas naturais diferentes, à sua escolha. Seus ataques desarmados causam 1d6 de dano de concussão, perfurante ou cortante, como apropriado para a arma natural que você escolheu, e você é proficiente com seus ataques desarmados. Finalmente, a arma natural é mágica e você tem +1 de bônus nas jogadas de ataque e dano que você fizer com ela."
   },
   {
+    nome: "Amigos Rápidos",
+    sinonimos: "Fast Friends",
+    hb: false,
+    nivel: 3,
+    escola: "Encantamento",
+    ritual: false,
+    classes: "Bardo, Clérigo, Mago",
+    tempo: "1 ação",
+    alcance: "9 metros",
+    comp: "V",
+    duracao: "Concentração, até 1 hora",
+    texto: "Quando você precisa garantir que algo seja feito, não pode confiar em promessas vagas, juramentos solenes ou contratos de trabalho vinculativos. Quando você conjura essa magia, escolha um humanoide dentro do alcance que possa ver e ouvir você, e que possa compreendê-lo. A criatura deve ser bem-sucedida em um teste de resistência de Sabedoria ou ficará enfeitiçada por você pela duração. Enquanto a criatura estiver enfeitiçada dessa forma, ela se compromete a realizar quaisquer serviços ou atividades que você pedir a ela de maneira amigável, da melhor forma possível.\n\nVocê pode definir novas tarefas para a criatura quando uma tarefa anterior for concluída, ou se decidir encerrar a tarefa atual dela. Se o serviço ou atividade puder causar dano à criatura, ou se entrar em conflito com as atividades e desejos normais da criatura, ela pode fazer outro teste de resistência de Sabedoria para tentar encerrar o efeito. Esse teste de resistência é feito com vantagem se você ou seus companheiros estiverem lutando contra a criatura. Se a atividade resultar em morte certa para a criatura, a magia termina.\n\nQuando a magia termina, a criatura sabe que foi enfeitiçada por você.",
+    niveis: "Quando você conjurar essa magia usando um espaço de magia de 4º nível ou superior, você pode escolher uma criatura adicional como alvo para cada nível do espaço acima do 3º."
+  },
+  {
     nome: "Amizade",
     sinonimos: "Friends",
     hb: false,
@@ -229,7 +227,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 5,
     escola: "Abjuração",
-    classes: "Bardo, Clérigo, Druida, Mago",
+    classes: "Bardo, Bruxo (Opcional), Clérigo, Druida, Mago",
     tempo: "1 hora",
     alcance: "18 metros",
     comp: "V, S, M (uma joia valendo, no mínimo, 1.000 po, consumida pela magia)",
@@ -286,26 +284,12 @@ window.MAGIAS = [
     hb: false,
     nivel: 8,
     escola: "Encantamento",
-    classes: "Druida, Mago",
+    classes: "Bardo (Opcional), Druida, Mago",
     tempo: "1 hora",
     alcance: "18 metros",
     comp: "V, S, M (ou um pedaço de alume embebido em vinagre para o efeito de antipatia, ou uma gota de mel para o efeito de simpatia)",
     duracao: "10 dias",
     texto: "Essa magia atrai ou repele as criaturas de sua escolha. Você escolhe um alvo dentro do alcance, tanto um objeto ou criatura Enorme ou menor ou uma área que não seja maior que 60 metros cúbicos. Então, especifica um tipo de criatura inteligente, como dragões vermelhos, goblins ou vampiros. Você envolve o alvo com uma aura que pode atrair ou repelir as criaturas específicas pela duração. Escolha antipatia ou simpatia como efeito da aura.\n\n**Antipatia.** O encantamento faz com que criaturas do tipo designado por você sintam-se fortemente impelidas em deixar a área e evitar o alvo. Quando uma dessas criaturas puder ver o alvo ou ficar a 18 metros dele, a criatura deve ser bem sucedida num teste de resistência de Sabedoria ou ficará amedrontada. A criatura continuará amedrontada enquanto puder ver o alvo ou permanecer a 18 metros dele. Enquanto estiver amedrontada pelo alvo, a criatura deve usar seu deslocamento para se mover para o local seguro mais próximo o qual ela não possa ver o alvo. Se a criatura se mover para mais de 18 metros do alvo e não puder vê-lo, a criatura não estará mais amedrontada, mas ela ficará amedrontada novamente se voltar a ver o alvo ou ficar a 18 metros dele.\n\n**Simpatia.** O encantamento faz com que as criaturas especificadas sintam-se fortemente impelidas a se aproximar do alvo enquanto estiverem a 18 metros dele ou puderem vê-lo. Quando uma dessas criaturas puder ver o alvo ou ficar a 18 metros dele, a criatura deve ser bem sucedida num teste de resistência de Vontade ou usará seu deslocamento em cada um dos seus turnos para entrar na área ou se mover até o alcance do alvo. Quando a criatura tiver feito isso, ela não poderá se afastar do alvo voluntariamente.\n\nSe o alvo causar dano ou ferir a criatura afetada de alguma forma, a criatura afetada pode realizar um novo teste de resistência de Sabedoria para terminar o efeito, como descrito abaixo.\n\n**Terminando o Efeito.** Se uma criatura afetada terminar seu turno enquanto não estiver a até 18 metros do alvo ou não for capaz de vê-lo, a criatura faz um teste de resistência de Sabedoria. Em um sucesso, a criatura não estará mais afetada pelo alvo e reconhecerá o sentimento de repugnância ou atração como mágico. Além disso, uma criatura afetada pela magia tem direito a outro teste de resistência de Sabedoria a cada 24 horas enquanto a magia durar.\n\nUma criatura que obtenha sucesso na resistência contra esse efeito ficará imune a ele por 1 minuto, depois desse tempo, ela pode ser afetada novamente."
-  },
-  {
-    nome: "Aspecto Sobrenatural de Tasha",
-    sinonimos: "Tasha's Otherworldly Guise",
-    hb: false,
-    nivel: 6,
-    escola: "Transmutação",
-    concentracao: true,
-    classes: "Bruxo, Feiticeiro, Mago",
-    tempo: "1 ação bônus",
-    alcance: "Pessoal",
-    comp: "V, S, M (um objeto gravado com um símbolo dos Planos Exteriores com valor mínimo de 500 PO)",
-    duracao: "Concentração, até 1 minuto",
-    texto: "Proferindo um encantamento, você utiliza a magia dos Planos Inferiores ou Planos Superiores (você escolhe) para se transformar. Você obtém os seguintes benefícios até o término da magia:\n- Você é imune a dano ígneo e venenoso (Planos Inferiores) ou dano radiante e necrótico (Planos Superiores).\n- Você é imune à condição envenenado (Planos Inferiores) ou à condição encantado (Planos Superiores).\n- Asas espectrais aparecem em suas costas, concedendo um deslocamento de voo de 12 metros.\n- Você recebe um bônus de +2 na CA.\n- Todos os seus ataques com armas são mágicos e você pode usar seu modificador de atributo de conjuração, ao invés de Força ou Destreza, nas jogadas de ataque e dano.\n- Você pode realizar dois ataques ao invés de um, quando realiza a ação Ataque no seu turno. Você ignora esse benefício se já tiver uma característica, como Ataque Extra, que permite atacar mais de uma vez ao realizar a ação Ataque no seu turno."
   },
   {
     nome: "Aprimorar Habilidade",
@@ -314,7 +298,7 @@ window.MAGIAS = [
     nivel: 2,
     escola: "Transmutação",
     concentracao: true,
-    classes: "Bardo, Clérigo, Druida, Feiticeiro",
+    classes: "Bardo, Clérigo, Druida, Feiticeiro, Mago (Opcional), Patrulheiro (Opcional)",
     tempo: "1 ação",
     alcance: "Toque",
     comp: "V, S, M (pelo ou penas de uma besta)",
@@ -354,7 +338,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 1,
     escola: "Conjuração",
-    classes: "Artífice, Mago",
+    classes: "Artífice, Feiticeiro (Opcional), Mago",
     tempo: "1 ação",
     alcance: "18 metros",
     comp: "V, S, M (um pouco de pele de porco ou manteiga)",
@@ -368,7 +352,7 @@ window.MAGIAS = [
     nivel: 3,
     escola: "Transmutação",
     concentracao: true,
-    classes: "Paladino",
+    classes: "Artífice, Druida (Opcional), Paladino, Patrulheiro (Opcional)",
     tempo: "1 ação",
     alcance: "Toque",
     comp: "V, S",
@@ -397,7 +381,7 @@ window.MAGIAS = [
     nivel: 2,
     escola: "Transmutação",
     concentracao: true,
-    classes: "Mago, Paladino",
+    classes: "Artífice, Feiticeiro (Opcional), Mago, Paladino, Patrulheiro (Opcional)",
     tempo: "1 ação bônus",
     alcance: "Toque",
     comp: "V, S",
@@ -460,13 +444,27 @@ window.MAGIAS = [
     texto: "Escolha um objeto que você possa ver, dentro do alcance. O objeto pode ser uma porta, uma caixa, um baú ou um par de algemas, um cadeado ou outro objeto que contenha um meio mundano ou mágico que previne o acesso.\n\nUm alvo que esteja fechado por uma fechadura mundana ou preso ou barrado torna-se destrancado, destravado ou desbloqueado. Se o objeto tiver múltiplas fechaduras, apenas uma delas é destrancada.\n\nSe você escolher um alvo que esteja travado pela magia tranca arcana, essa magia será suprimida por 10 minutos, durante esse período o alvo pode ser aberto e fechado normalmente.\n\nQuando você conjurar essa magia, uma batida forte, audível a até 90 metros de distância, emana do objeto alvo."
   },
   {
+    nome: "Aspecto Sobrenatural de Tasha",
+    sinonimos: "Tasha's Otherworldly Guise",
+    hb: false,
+    nivel: 6,
+    escola: "Transmutação",
+    concentracao: true,
+    classes: "Bruxo (Opcional), Feiticeiro (Opcional), Mago (Opcional)",
+    tempo: "1 ação bônus",
+    alcance: "Pessoal",
+    comp: "V, S, M (um objeto gravado com um símbolo dos Planos Exteriores com valor mínimo de 500 PO)",
+    duracao: "Concentração, até 1 minuto",
+    texto: "Proferindo um encantamento, você utiliza a magia dos Planos Inferiores ou Planos Superiores (você escolhe) para se transformar. Você obtém os seguintes benefícios até o término da magia:\n- Você é imune a dano ígneo e venenoso (Planos Inferiores) ou dano radiante e necrótico (Planos Superiores).\n- Você é imune à condição envenenado (Planos Inferiores) ou à condição encantado (Planos Superiores).\n- Asas espectrais aparecem em suas costas, concedendo um deslocamento de voo de 12 metros.\n- Você recebe um bônus de +2 na CA.\n- Todos os seus ataques com armas são mágicos e você pode usar seu modificador de atributo de conjuração, ao invés de Força ou Destreza, nas jogadas de ataque e dano.\n- Você pode realizar dois ataques ao invés de um, quando realiza a ação Ataque no seu turno. Você ignora esse benefício se já tiver uma característica, como Ataque Extra, que permite atacar mais de uma vez ao realizar a ação Ataque no seu turno."
+  },
+  {
     nome: "Assassino Fantasmagórico",
     sinonimos: "Phantasmal Killer",
     hb: false,
     nivel: 4,
     escola: "Ilusão",
     concentracao: true,
-    classes: "Mago",
+    classes: "Bardo (Opcional), Mago",
     tempo: "1 ação",
     alcance: "36 metros",
     comp: "V, S",
@@ -521,12 +519,13 @@ window.MAGIAS = [
     hb: false,
     nivel: 0,
     escola: "Evocação",
-    classes: "Artífice, Feiticeiro, Bruxo, Mago",
+    classes: "Artífice, Feiticeiro (Opcional), Bruxo (Opcional), Mago (Opcional)",
     tempo: "1 ação",
     alcance: "Pessoal (4,5 metros de raio)",
     comp: "V",
     duracao: "Instantânea",
-    texto: "Você cria um açoite de energia elétrica que atinge uma criatura à sua escolha, que você possa ver e esteja a até 4,5 metros de você. O alvo deve ser bem-sucedido em uma salvaguarda de Força ou será puxado até 3 metros em linha reta em sua direção, e sofrerá 1d8 pontos de dano elétrico se estiver a menos de 1,5 metro de você.\n\nO dano desta magia aumenta em 1d8 quando você atinge o 5º nível (2d8), 11º nível (3d8) e 17º nível (4d8)."
+    texto: "Você cria um açoite de energia elétrica que atinge uma criatura à sua escolha, que você possa ver e esteja a até 4,5 metros de você. O alvo deve ser bem-sucedido em uma salvaguarda de Força ou será puxado até 3 metros em linha reta em sua direção, e sofrerá 1d8 pontos de dano elétrico se estiver a menos de 1,5 metro de você.",
+    niveis: "O dano desta magia aumenta em 1d8 quando você atinge o 5º nível (2d8), 11º nível (3d8) e 17º nível (4d8)."
   },
   {
     nome: "Augúrio",
@@ -535,7 +534,7 @@ window.MAGIAS = [
     nivel: 2,
     escola: "Adivinhação",
     ritual: true,
-    classes: "Clérigo",
+    classes: "Clérigo, Druida (Opcional), Mago (Opcional)",
     tempo: "1 minuto",
     alcance: "Pessoal",
     comp: "V, S, M (varetas, ossos ou objetos similarmente marcados valendo, no mínimo, 25 po)",
@@ -549,7 +548,7 @@ window.MAGIAS = [
     nivel: 2,
     escola: "Transmutação",
     concentracao: true,
-    classes: "Feiticeiro, Mago",
+    classes: "Artífice, Bardo (Opcional), Druida (Opcional), Feiticeiro, Mago",
     tempo: "1 ação",
     alcance: "9 metros",
     comp: "V, S, M (um pouco de pó de ferro)",
@@ -563,7 +562,7 @@ window.MAGIAS = [
     nivel: 4,
     escola: "Abjuração",
     concentracao: true,
-    classes: "Paladino",
+    classes: "Clérigo (Opcional), Paladino",
     tempo: "1 ação",
     alcance: "Pessoal (9 metros de raio)",
     comp: "V",
@@ -577,7 +576,7 @@ window.MAGIAS = [
     nivel: 4,
     escola: "Abjuração",
     concentracao: true,
-    classes: "Paladino",
+    classes: "Clérigo (Opcional), Paladino",
     tempo: "1 ação",
     alcance: "Pessoal (9 metros de raio)",
     comp: "V",
@@ -591,7 +590,7 @@ window.MAGIAS = [
     nivel: 3,
     escola: "Evocação",
     concentracao: true,
-    classes: "Paladino",
+    classes: "Clérigo (Opcional), Druida (Opcional), Paladino",
     tempo: "1 ação",
     alcance: "Pessoal (9 metros de raio)",
     comp: "V",
@@ -669,6 +668,21 @@ window.MAGIAS = [
     niveis: "Quando você conjura essa magia usando um espaço de magia de 3° nível ou superior, o dano aumenta em 1d6 para cada nível do espaço de magia acima do 2°."
   },
   {
+    nome: "Bando de Familiares",
+    sinonimos: "Flock of Familiars",
+    hb: false,
+    nivel: 2,
+    escola: "Conjuração",
+    ritual: false,
+    classes: "Bruxo, Mago",
+    tempo: "1 minuto",
+    alcance: "Toque",
+    comp: "V, S",
+    duracao: "Concentração, até 1 hora",
+    texto: "Você invoca temporariamente três familiares — espíritos que assumem formas animais à sua escolha. Cada familiar usa as mesmas regras e opções de um familiar conjurado pela magia encontrar familiar. Todos os familiares conjurados por essa magia devem ser do mesmo tipo de criatura (celestiais, fadas ou corruptores; à sua escolha). Se você já tiver um familiar conjurado pela magia encontrar familiar ou por meios semelhantes, um familiar a menos é conjurado por essa magia.\n\nOs familiares invocados por essa magia podem se comunicar telepaticamente com você e compartilhar seus sentidos visuais ou auditivos enquanto estiverem a até 1,5 quilômetro de você.\n\nQuando você conjura uma magia com alcance de toque, um dos familiares conjurados por essa magia pode transmitir a magia, como de costume. No entanto, você pode conjurar uma magia de toque através de apenas um familiar por turno.",
+    niveis: "Quando você conjurar essa magia usando um espaço de magia de 3º nível ou superior, você conjura um familiar adicional para cada nível do espaço acima do 2º."
+  },
+  {
     nome: "Banimento",
     sinonimos: "Banishment",
     hb: false,
@@ -689,7 +703,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 6,
     escola: "Conjuração",
-    classes: "Clérigo, Druida",
+    classes: "Bardo (Opcional), Clérigo, Druida",
     tempo: "10 minutos",
     alcance: "9 metros",
     comp: "V, S, M (uma tigela encrustada de gemas valendo, no mínimo, 1.000 po, que é consumida pela magia)",
@@ -767,6 +781,20 @@ window.MAGIAS = [
     duracao: "Concentração, até 1 minuto",
     texto: "Um feixe de luz amarelada é disparado da ponta do seu dedo, então se condensa e aguarda no ponto escolhido, dentro do alcance, como uma conta brilhante, pela duração. Quando a magia termina, seja por sua concentração ter sido interrompida ou por você ter decidido terminá-la, a conta eclode com um estampido baixo, explodindo em chamas que se espalham, dobrando esquinas. Cada criatura numa esfera, com 6 metros de raio, centrada na conta, deve realizar um teste de resistência de Destreza. Uma criatura sofre dano igual ao total de dano acumulado se falhar na resistência, ou metade do total se obtiver sucesso.\n\nO dano base da magia é 12d6. Se até o final do seu turno a conta ainda não tiver sido detonada, o dano aumenta em 1d6.\n\nSe a conta brilhante for tocada antes do intervalo expirar, a criatura que a tocou deve realizar um teste de resistência de Destreza. Se falhar na resistência, a magia termina imediatamente, fazendo a conta explodir em chamas. Se obtiver sucesso na resistência, a criatura pode arremessar a conta a até 12 metros. Quando ela atinge uma criatura ou objeto sólido, a magia termina e a conta explode.\n\nO fogo danifica objetos na área e incendeia objetos inflamáveis que não estejam sendo vestidos ou carregados.",
     niveis: "Quando você conjurar essa magia usando um espaço de magia de 8° nível ou superior, o dano base aumenta em 1d6 para cada nível do espaço acima do 7°."
+  },
+  {
+    nome: "Bolso de Pulso",
+    sinonimos: "Wristpocket",
+    hb: false,
+    nivel: 2,
+    escola: "Conjuração",
+    ritual: true,
+    classes: "Mago",
+    tempo: "1 ação ou ritual",
+    alcance: "Pessoal",
+    comp: "S",
+    duracao: "Concentração, até 1 hora",
+    texto: "Você dá um leve movimento com o pulso, fazendo com que um objeto em sua mão desapareça. O objeto, que apenas você pode estar segurando e que pode pesar no máximo 2,5 quilos, é transportado para um espaço extradimensional, onde permanece pela duração.\n\nAté a magia terminar, você pode usar sua ação para invocar o objeto para a sua mão livre e pode usar sua ação para devolver o objeto ao espaço extradimensional. Um objeto que ainda esteja no plano de bolso quando a magia terminar aparece no seu espaço, aos seus pés."
   },
   {
     nome: "Bom Fruto",
@@ -897,7 +925,7 @@ window.MAGIAS = [
     nivel: 6,
     escola: "Transmutação",
     concentracao: true,
-    classes: "Bruxo, Mago",
+    classes: "Bruxo, Druida (Opcional), Feiticeiro (Opcional), Mago",
     tempo: "1 ação",
     alcance: "18 metros",
     comp: "V, S, M (uma pitada de cal, água e terra)",
@@ -980,7 +1008,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 2,
     escola: "Evocação",
-    classes: "Clérigo, Mago",
+    classes: "Artífice, Clérigo, Druida (Opcional), Mago",
     tempo: "1 ação",
     alcance: "Toque",
     comp: "V, S, M (pó de rubi no valor de 50 po, consumido pela magia)",
@@ -998,7 +1026,8 @@ window.MAGIAS = [
     alcance: "18 metros",
     comp: "V, S",
     duracao: "Instantânea",
-    texto: "Radiação similar a uma chama desce sobre uma criatura que você possa ver, dentro do alcance. O alvo deve ser bem sucedido num teste de resistência de Destreza ou sofrerá 1d8 de dano radiante. O alvo não recebe qualquer benefício de cobertura contra esse teste de resistência.\n\nO dano da magia aumenta em 1d8 quando você alcança o 5° nível (2d8), 11° nível (3d8) e 17° nível (4d8)."
+    texto: "Radiação similar a uma chama desce sobre uma criatura que você possa ver, dentro do alcance. O alvo deve ser bem sucedido num teste de resistência de Destreza ou sofrerá 1d8 de dano radiante. O alvo não recebe qualquer benefício de cobertura contra esse teste de resistência.",
+    niveis: "O dano da magia aumenta em 1d8 quando você alcança o 5° nível (2d8), 11° nível (3d8) e 17° nível (4d8)."
   },
   {
     nome: "Chamado Infernal",
@@ -1026,7 +1055,8 @@ window.MAGIAS = [
     alcance: "9 metros",
     comp: "V, S, M (uma muda de uma planta com espinhos)",
     duracao: "Instantânea",
-    texto: "Você cria um longo chicote de vinhas coberto por espinhos que chicoteia, ao seu comando, em direção de uma criatura dentro do alcance. Realize um ataque corpo-a-corpo com magia contra o alvo. Se o ataque atingir, a criatura sofrerá 1d6 de dano perfurante e, se a criatura for Grande ou menor, você a puxa até 3 metros para perto de você.\n\nO dano dessa magia aumenta em 1d6 quando você alcança o 5° nível (2d6), 11° nível (3d6) e 17° nível (4d6)."
+    texto: "Você cria um longo chicote de vinhas coberto por espinhos que chicoteia, ao seu comando, em direção de uma criatura dentro do alcance. Realize um ataque corpo-a-corpo com magia contra o alvo. Se o ataque atingir, a criatura sofrerá 1d6 de dano perfurante e, se a criatura for Grande ou menor, você a puxa até 3 metros para perto de você.",
+    niveis: "O dano dessa magia aumenta em 1d6 quando você alcança o 5° nível (2d6), 11° nível (3d6) e 17° nível (4d6)."
   },
   {
     nome: "Chuva de Bolas de Neve de Snilloc",
@@ -1089,7 +1119,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 5,
     escola: "Conjuração",
-    classes: "Bardo, Feiticeiro, Mago",
+    classes: "Bardo, Bruxo (Opcional), Feiticeiro, Mago",
     tempo: "1 minuto",
     alcance: "3 metros",
     comp: "V, M (giz e tintas raros infundidos com pedras preciosas no valor de 50 po, consumidos pela magia)",
@@ -1138,6 +1168,20 @@ window.MAGIAS = [
     texto: "Essa magia produz uma duplicata inerte de uma criatura viva como uma garantia contra a morte. Esse clone é formado dentro de um receptáculo selado e cresce ao seu tamanho total, atingindo a maturidade após 120 dias; Você também pode escolher que o clone seja uma versão mais jovem da mesma criatura. Ele permanece inerte e dura indefinidamente, enquanto seu receptáculo permanecer intocado.\n\nA qualquer momento, após o clone amadurecer, se a criatura original morrer, sua alma é transferida para o clone, considerando que a alma está livre e deseje retornar. O clone é fisicamente idêntico ao original e tem a mesma personalidade, memórias e habilidades, mas não possui qualquer equipamento do original. O físico da criatura original permanece, se ainda existir, se tornando inerte e não podendo, consequentemente, ser trazido de volta à vida, já que a alma da criatura está em outro lugar."
   },
   {
+    nome: "Codificar Pensamentos",
+    sinonimos: "Encode Thoughts",
+    hb: false,
+    nivel: 0,
+    escola: "Encantamento",
+    ritual: false,
+    classes: "",
+    tempo: "1 ação",
+    alcance: "Pessoal",
+    comp: "S",
+    duracao: "8 horas",
+    texto: "Encostando um dedo na cabeça, você puxa uma memória, uma ideia ou uma mensagem da sua mente e a transforma em um fio tangível de energia brilhante chamado fio de pensamento, que persiste durante a duração ou até você conjurar essa magia novamente. O fio de pensamento surge em um espaço desocupado a até 1,5 metro de você como um objeto Miúdo, sem peso e semissólido que pode ser segurado e carregado como uma fita. De outra forma, ele permanece parado.\n\nSe você conjurar essa magia enquanto se concentra em uma magia ou habilidade que permita ler ou manipular os pensamentos de outras pessoas (como detectar pensamentos ou modificar memória), você pode transformar os pensamentos ou memórias que leu, em vez dos seus próprios, em um fio de pensamento.\n\nConjurar essa magia enquanto segura um fio de pensamento permite que você receba instantaneamente qualquer memória, ideia ou mensagem que o fio de pensamento contenha. (Conjurar detectar pensamentos no fio tem o mesmo efeito.)\n\nNota: Essa magia não pertence à lista padrão de nenhuma classe no *Guildmasters' Guide to Ravnica*, sendo obtida por meio da característica Magias de Guilda Dimir do antecedente Agente Dimir (que adiciona o truque à lista da sua classe caso você possua Conjuração ou Magia de Pacto), por itens ligados à Casa Dimir ou por permissão do mestre."
+  },
+  {
     nome: "Coluna de Chamas",
     sinonimos: "Flame Strike",
     hb: false,
@@ -1157,7 +1201,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 1,
     escola: "Encantamento",
-    classes: "Clérigo, Paladino",
+    classes: "Bardo (Opcional), Clérigo, Paladino",
     tempo: "1 ação",
     alcance: "18 metros",
     comp: "V",
@@ -1227,7 +1271,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 5,
     escola: "Evocação",
-    classes: "Feiticeiro, Mago",
+    classes: "Druida (Opcional), Feiticeiro, Mago",
     tempo: "1 ação",
     alcance: "Pessoal (cone de 18 metros)",
     comp: "V, S, M (um pequeno cristal ou cone de vidro)",
@@ -1249,6 +1293,20 @@ window.MAGIAS = [
     duracao: "Concentração, até 1 minuto",
     texto: "Essa magia ataca e embaralha as mentes das criaturas, gerando delírios e provocando ações descontroladas. Cada criatura em uma esfera com 3 metros de raio, centrada num ponto, à sua escolha, dentro do alcance, deve ser bem sucedida num teste de resistência de Sabedoria, quando você conjurar essa magia ou for afetada por ela.\n\nUm alvo afetado não pode realizar reações e deve rolar um d10 no início de cada um dos seus turnos para determinar seu comportamento nesse turno.\n\n| d10 | Comportamento |\n|---|---|\n| 1 | A criatura usa todo seu deslocamento para se mover em uma direção aleatória. Para determinar a direção, role um d8 e atribua uma direção a cada face do dado. A criatura não realiza uma ação nesse turno. |\n| 2–6 | A criatura não se move ou realiza ações nesse turno. |\n| 7–8 | A criatura usa sua ação para realizar um ataque corpo-a-corpo contra uma criatura, determinada aleatoriamente, ao seu alcance. Se não houver criaturas dentro do alcance, a criatura não faz nada nesse turno. |\n| 9–10 | A criatura pode agir e se mover normalmente. |\n\nAo final de cada um dos seus turnos, um alvo afetado pode realizar um teste de resistência de Sabedoria. Se for bem sucedido, esse efeito acaba nesse alvo.",
     niveis: "Se você conjurar essa magia usando um espaço de magia de 5° nível ou superior, o raio da esfera aumenta em 1,5 metro para cada nível do espaço acima do 4°."
+  },
+  {
+    nome: "Conhecimento Emprestado",
+    sinonimos: "Borrowed Knowledge",
+    hb: false,
+    nivel: 2,
+    escola: "Adivinhação",
+    ritual: false,
+    classes: "Bardo, Bruxo, Clérigo, Mago",
+    tempo: "1 ação",
+    alcance: "Pessoal",
+    comp: "V, S, M (um livro que valha no mínimo 25 po)",
+    duracao: "1 hora",
+    texto: "Você recorre ao conhecimento de espíritos do passado. Escolha uma perícia na qual você não possua proficiência. Pela duração da magia, você tem proficiência na perícia escolhida. A magia termina antecipadamente se você a conjurar novamente."
   },
   {
     nome: "Conhecimento Lendário",
@@ -1411,7 +1469,7 @@ window.MAGIAS = [
     nivel: 1,
     escola: "Conjuração",
     concentracao: true,
-    classes: "Druida",
+    classes: "Druida, Patrulheiro (Opcional)",
     tempo: "1 ação",
     alcance: "27 metros",
     comp: "V, S",
@@ -1664,7 +1722,8 @@ window.MAGIAS = [
     alcance: "Pessoal",
     comp: "V, S",
     duracao: "10 minutos",
-    texto: "Uma chama tremulante aparece na sua mão. A chama permanece aí pela duração e não machuca nem você nem seu equipamento. A chama emite luz plena num raio de 3 metros e penumbra por 3 metros adicionais. A magia acaba se você dissipá-la usando uma ação ou se conjurá-la novamente.\n\nVocê pode, também, atacar com a chama, no entanto, fazer isso acaba com a magia. Quando você conjura essa magia ou com uma ação em um turno posterior, você pode arremessar a chama numa criatura a até 9 metros de você. Faça um ataque à distância com magia. Se atingir, o alvo sofre 1d8 de dano de fogo.\n\nO dano dessa magia aumenta em 1d8 quando você alcança o 5° nível (2d8), 11° nível (3d8) e 17° nível (4d8)."
+    texto: "Uma chama tremulante aparece na sua mão. A chama permanece aí pela duração e não machuca nem você nem seu equipamento. A chama emite luz plena num raio de 3 metros e penumbra por 3 metros adicionais. A magia acaba se você dissipá-la usando uma ação ou se conjurá-la novamente.\n\nVocê pode, também, atacar com a chama, no entanto, fazer isso acaba com a magia. Quando você conjura essa magia ou com uma ação em um turno posterior, você pode arremessar a chama numa criatura a até 9 metros de você. Faça um ataque à distância com magia. Se atingir, o alvo sofre 1d8 de dano de fogo.",
+    niveis: "O dano dessa magia aumenta em 1d8 quando você alcança o 5° nível (2d8), 11° nível (3d8) e 17° nível (4d8)."
   },
   {
     nome: "Criar Fogueira",
@@ -1678,7 +1737,8 @@ window.MAGIAS = [
     alcance: "18 metros",
     comp: "V, S",
     duracao: "Concentração, até 1 minuto",
-    texto: "Você cria uma fogueira no solo em um ponto que você possa ver, dentro do alcance. Até a magia acabar, a fogueira preenche um cubo de 1,5 metros. Qualquer criatura no espaço da fogueira quando você a conjura deve ser bem sucedida num teste de resistência de Destreza ou sofrerá 1d8 de dano de fogo. Uma criatura também deve realizar o teste de resistência quando entrar no espaço da fogueira pela primeira vez em um turno, ou terminar seu turno nela.\n\nO dano da magia aumenta em 1d8 quando você alcança o 5° nível (2d8), 11° nível (3d8) e 17° nível (4d8)."
+    texto: "Você cria uma fogueira no solo em um ponto que você possa ver, dentro do alcance. Até a magia acabar, a fogueira preenche um cubo de 1,5 metros. Qualquer criatura no espaço da fogueira quando você a conjura deve ser bem sucedida num teste de resistência de Destreza ou sofrerá 1d8 de dano de fogo. Uma criatura também deve realizar o teste de resistência quando entrar no espaço da fogueira pela primeira vez em um turno, ou terminar seu turno nela.",
+    niveis: "O dano da magia aumenta em 1d8 quando você alcança o 5° nível (2d8), 11° nível (3d8) e 17° nível (4d8)."
   },
   {
     nome: "Criar Homúnculo",
@@ -1692,6 +1752,20 @@ window.MAGIAS = [
     comp: "V, S, M (argila, cinzas e raiz de mandrágora e uma adaga incrustada com joias valendo, no mínimo, 1000po que a magia consome)",
     duracao: "Instantânea",
     texto: "Ao recitar um encantamento intrincado, você se corta com uma adaga incrustada de joias, levando 2d4 de dano de perfuração que não pode ser reduzido de forma alguma. Você então goteja seu sangue sobre os outros componentes da magia e os toca, transformando-os em um construto especial chamado homúnculo.\n\nAs estatísticas do homúnculo estão no Manual dos Monstros. Ele é seu companheiro fiel, e morre se você morrer. Sempre que você terminar um longo descanso, você pode gastar até metade dos seus dados de vida, se o homúnculo estiver no mesmo plano de existência como você. Quando fizer isso, role cada dado e adicione o seu modificador de Constituição a ele. Seu valor máximo de pontos de vida é reduzido pelo total, e o valor máximo de pontos de vida do homúnculo, e seus pontos de vida atuais, são ambos aumentados por ele. Este processo não pode reduzir você para menos de 1 ponto de vida, e a mudança para o seus pontos de vida e os do homúnculos terminam quando você termina o seu próximo descanso longo. A redução ao seu valor máximo de pontos de vida não pode ser removido por qualquer meio antes disso, exceto pela morte do homúnculo.\n\nVocê pode ter apenas um homúnculo por vez. Se você conjurar esta magia enquanto o seu homúnculo viver, a magia falhará."
+  },
+  {
+    nome: "Criar Magen",
+    sinonimos: "Create Magen",
+    hb: false,
+    nivel: 7,
+    escola: "Transmutação",
+    ritual: false,
+    classes: "Mago",
+    tempo: "1 hora",
+    alcance: "Toque",
+    comp: "V, S, M (um frasco de mercúrio no valor de 500 po e um boneco humano em tamanho real, ambos consumidos pela magia, e uma haste de cristal intrincada no valor de no mínimo 1.500 po que não é consumida)",
+    duracao: "Instantânea",
+    texto: "Enquanto conjura a magia, você coloca um frasco de mercúrio no peito de um boneco humano em tamanho real preenchido com cinzas ou pó. Em seguida, você costura o boneco e pinga seu sangue nele. Ao final da conjuração, você toca o boneco com uma haste de cristal, transformando-o em um magen vestido com o que quer que o boneco estivesse usando. O tipo de magen é escolhido por você durante a conjuração da magia. Consulte o apêndice C para os diferentes tipos de magen e suas estatísticas.\n\nQuando o magen aparece, seu máximo de pontos de vida diminui em um valor igual ao nível de desafio do magen (redução mínima de 1). Apenas uma magia desejo pode desfazer essa redução no seu máximo de pontos de vida.\n\nQualquer magen que você criar com essa magia obedece aos seus comandos sem questionar."
   },
   {
     nome: "Criar Mortos-Vivos",
@@ -1804,6 +1878,20 @@ window.MAGIAS = [
     niveis: "Quando você conjurar essa magia usando um espaço de magia de 6° nível ou superior, a cura aumenta em 1d8 para cada nível do espaço acima do 5°."
   },
   {
+    nome: "Dádiva da Alacridade",
+    sinonimos: "Gift of Alacrity",
+    hb: false,
+    nivel: 1,
+    escola: "Adivinhação",
+    ritual: false,
+    classes: "Mago",
+    tempo: "1 minuto",
+    alcance: "Toque",
+    comp: "V, S",
+    duracao: "8 horas",
+    texto: "Você toca uma criatura voluntária. Pela duração, o alvo pode adicionar 1d8 às suas jogadas de iniciativa."
+  },
+  {
     nome: "Dança Irresistível de Otto",
     sinonimos: "Otto's Irresistible Dance",
     hb: false,
@@ -1844,6 +1932,36 @@ window.MAGIAS = [
     comp: "V, S",
     duracao: "Instantânea",
     texto: "Você envia energia negativa na direção de uma criatura que você possa ver, dentro do alcance, causando dores severas nela. O alvo deve realizar um teste de resistência de Constituição. Ele sofre 7d8 + 30 de dano necrótico se falhar na resistência, ou metade desse dano se obtiver sucesso.\n\nUm humanoide morto por essa magia se ergue no início do seu próximo turno como um zumbi que está permanentemente sob seu controle, seguindo suas ordens verbais da melhor forma possível."
+  },
+  {
+    nome: "Dedos Gélidos",
+    sinonimos: "Frost Fingers",
+    hb: false,
+    nivel: 1,
+    escola: "Evocação",
+    ritual: false,
+    classes: "Mago",
+    tempo: "1 ação",
+    alcance: "Pessoal (cone de 4,5 metros)",
+    comp: "V, S",
+    duracao: "Instantânea",
+    texto: "Um frio congelante irrompe das pontas dos seus dedos em um cone de 4,5 metros. Cada criatura naquela área deve fazer um teste de resistência de Constituição, sofrendo 2d8 de dano de frio se falhar no teste, ou metade desse dano se obtiver sucesso.\n\nO frio congela líquidos não mágicos na área que não estejam sendo vestidos ou carregados.",
+    niveis: "Quando você conjurar essa magia usando um espaço de magia de 2º nível ou superior, o dano aumenta em 1d8 para cada nível do espaço acima do 1º."
+  },
+  {
+    nome: "Definhar e Florescer",
+    sinonimos: "Wither and Bloom",
+    hb: false,
+    nivel: 2,
+    escola: "Necromancia",
+    ritual: false,
+    classes: "Druida, Feiticeiro, Mago",
+    tempo: "1 ação",
+    alcance: "18 metros",
+    comp: "V, S, M (uma vinha seca torcida em um laço)",
+    duracao: "Instantânea",
+    texto: "Você invoca tanto a morte quanto a vida em uma esfera de 3 metros de raio centrada em um ponto dentro do alcance. Cada criatura à sua escolha nessa área deve fazer um teste de resistência de Constituição, sofrendo 2d6 de dano necrótico se falhar no teste, ou metade desse dano se obtiver sucesso. A vegetação não mágica nessa área definha.\n\nAlém disso, uma criatura à sua escolha nessa área pode gastar e rolar um de seus Dados de Vida não gastos e recuperar uma quantidade de pontos de vida igual ao resultado da rolagem mais o seu modificador de habilidade de conjuração.",
+    niveis: "Quando você conjurar essa magia usando um espaço de magia de 3º nível ou superior, o dano aumenta em 1d6 para cada nível do espaço acima do 2º, e o número de Dados de Vida que podem ser gastos e adicionados à rolagem de cura aumenta em um para cada nível do espaço acima do 2º."
   },
   {
     nome: "Desejo",
@@ -1906,7 +2024,7 @@ window.MAGIAS = [
     nivel: 5,
     escola: "Ilusão",
     concentracao: true,
-    classes: "Bardo, Mago",
+    classes: "Bardo, Bruxo (Opcional), Mago",
     tempo: "1 ação",
     alcance: "Pessoal",
     comp: "S",
@@ -1991,7 +2109,7 @@ window.MAGIAS = [
     nivel: 1,
     escola: "Evocação",
     concentracao: true,
-    classes: "Paladino",
+    classes: "Paladino, Patrulheiro (Opcional)",
     tempo: "1 ação bônus",
     alcance: "Pessoal",
     comp: "V",
@@ -2012,6 +2130,21 @@ window.MAGIAS = [
     comp: "V",
     duracao: "Concentração, até 1 minuto",
     texto: "Da primeira vez que você atingir um ataque corpo-a-corpo com arma enquanto essa magia durar, sua arma é rodeada por trovões que são audíveis a até 90 metros de você e o ataque causa 2d6 de dano trovejante extra no alvo. Além disso, se o alvo for uma criatura, ele deve ser bem sucedido num teste de resistência de Força ou será empurrado 3 metros para longe de você e cairá no chão."
+  },
+  {
+    nome: "Desvio Temporal",
+    sinonimos: "Temporal Shunt",
+    hb: false,
+    nivel: 5,
+    escola: "Transmutação",
+    ritual: false,
+    classes: "Mago",
+    tempo: "1 reação, que você realiza quando uma criatura que você possa ver faz uma jogada de ataque ou começa a conjurar uma magia",
+    alcance: "36 metros",
+    comp: "V, S",
+    duracao: "1 rodada",
+    texto: "Você escolhe como alvo a criatura desencadeadora, que deve ser bem-sucedida em um teste de resistência de Sabedoria ou desaparecerá, sendo lançada para outro ponto no tempo e fazendo com que o ataque erre ou a magia seja desperdiçada. No início do próximo turno dela, o alvo reaparece onde estava ou no espaço desocupado mais próximo. O alvo não se lembra de você ter conjurado a magia ou de ter sido afetado por ela.",
+    niveis: "Quando você conjurar essa magia usando um espaço de magia de 6º nível ou superior, você pode escolher uma criatura adicional como alvo para cada nível do espaço acima do 5º. Todos os alvos devem estar a até 9 metros uns dos outros."
   },
   {
     nome: "Detectar Magia",
@@ -2072,6 +2205,20 @@ window.MAGIAS = [
     texto: "Pela duração, você sente a presença e localização de venenos, criaturas venenosas e doenças a até 9 metros de você. Você também identifica o tipo de veneno, criatura venenosa ou doença em cada caso.\n\nA magia pode penetrar a maioria das barreiras, mas é bloqueada por 30 centímetros de rocha, 2,5 centímetros de metal comum, uma fina camada de chumbo, ou 90 centímetros de madeira ou terra."
   },
   {
+    nome: "Devastação Temporal",
+    sinonimos: "Time Ravage",
+    hb: false,
+    nivel: 9,
+    escola: "Necromancia",
+    ritual: false,
+    classes: "Mago",
+    tempo: "1 ação",
+    alcance: "27 metros",
+    comp: "V, S, M (uma ampulheta cheia de pó de diamante que valha no mínimo 5.000 po, que a magia consome)",
+    duracao: "Instantânea",
+    texto: "Você escolhe como alvo uma criatura que possa ver dentro do alcance, submetendo sua forma física à devastação do envelhecimento rápido. O alvo deve fazer um teste de resistência de Constituição, sofrendo 10d12 de dano necrótico se falhar no teste, ou metade desse dano se obtiver sucesso. Se falhar no teste, o alvo também envelhece a ponto de ter apenas 30 dias restantes antes de morrer de velhice. Nesse estado envelhecido, o alvo tem desvantagem em jogadas de ataque, testes de habilidade e testes de resistência, e seu deslocamento de caminhada é reduzido à metade. Apenas a magia desejo ou restauração maior conjurada com um espaço de magia de 9º nível pode encerrar esses efeitos e restaurar o alvo à sua idade anterior."
+  },
+  {
     nome: "Diabo da Poeira",
     sinonimos: "Dust Devil",
     hb: false,
@@ -2112,6 +2259,21 @@ window.MAGIAS = [
     comp: "V, S, M (uma gota de mercúrio)",
     duracao: "1 hora",
     texto: "Essa magia cria um plano horizontal, circular de energia de 90 cm de diâmetro por 2,5 cm de espessura, que flutua 90 centímetros acima do chão em um espaço desocupado, à sua escolha, que você possa ver dentro do alcance. O disco permanece pela duração e pode suportar até 250 quilos. Se mais peso for colocado nele, a magia termina, e tudo em cima do disco cai no chão.\n\nO disco é imóvel enquanto você estiver a até 6 metros dele. Se você se afastar a mais de 6 metros dele, o disco seguirá você, mantendo-se a 6 metros de você. Ele pode atravessar terreno irregular, subir ou descer escadas, encostas e similares, mas ele não pode atravessar mudanças de elevação de 3 metros ou mais. Por exemplo, o disco não pode atravessar um fosso de 3 metros de profundidade nem poderia sair de tal fosso se tivesse sido criado no fundo dele.\n\nSe você se afastar mais de 30 metros do disco (tipicamente por ele não poder rodear um obstáculo para seguir você), a magia acaba."
+  },
+  {
+    nome: "Discurso Motivacional",
+    sinonimos: "Motivational Speech",
+    hb: false,
+    nivel: 3,
+    escola: "Encantamento",
+    ritual: false,
+    classes: "Bardo, Clérigo",
+    tempo: "1 minuto",
+    alcance: "18 metros",
+    comp: "V",
+    duracao: "1 hora",
+    texto: "\"Eu ouvi um discurso motivacional do Jim uma vez e foram os piores noventa segundos da minha vida. O que o Omin vê nele, afinal?\"\n\n— Walnut Dankgrass\n\nVocê se dirige a aliados, funcionários ou espectadores inocentes para exortá-los e inspirá-los à grandeza, quer eles tenham motivo para se empolgar ou não. Escolha até cinco criaturas dentro do alcance que possam ouvir você. Pela duração, cada criatura afetada ganha 5 pontos de vida temporários e tem vantagem em testes de resistência de Sabedoria. Se uma criatura afetada for atingida por um ataque, ela tem vantagem na próxima jogada de ataque que fizer. Assim que uma criatura afetada perder os pontos de vida temporários concedidos por essa magia, a magia termina para aquela criatura.",
+    niveis: "Quando você conjurar essa magia usando um espaço de magia de 4º nível ou superior, os pontos de vida temporários aumentam em 5 para cada nível do espaço acima do 3º."
   },
   {
     nome: "Disfarçar-se",
@@ -2168,6 +2330,36 @@ window.MAGIAS = [
     texto: "Energia cintilante envolve e protege você de fadas, mortos-vivos e criaturas originárias além do Plano Material. Pela duração, celestiais, corruptores, elementais, fadas e mortos-vivos têm desvantagem nas jogadas de ataque contra você.\n\nVocê pode terminar a magia prematuramente usando uma das funções especiais a seguir.\n\n**Cancelar Encantamento.** Com sua ação, você toca uma criatura que você possa alcançar que esteja enfeitiçada, amedrontada ou possuída por um celestial, corruptor, elemental, fada ou morto-vivo. A criatura tocada não estará mais enfeitiçada, amedrontada ou possuída por tais criaturas.\n\n**Demissão.** Com sua ação, faça um ataque corpo-a-corpo com magia contra um celestial, corruptor, elemental, fada ou morto-vivo que você possa alcançar. Se atingir, você pode tentar guiar a criatura de volta ao seu plano natal. A criatura deve ser bem sucedida num teste de resistência de Carisma ou será enviada de volta ao seu plano natal (se já não for aqui). Se elas não estiverem em seus planos de origem, mortos-vivos serão enviados para Umbra e fadas serão enviadas para Faéria."
   },
   {
+    nome: "Distorção de Vórtice",
+    sinonimos: "Vortex Warp",
+    hb: false,
+    nivel: 2,
+    escola: "Conjuração",
+    ritual: false,
+    classes: "Artífice, Feiticeiro, Mago",
+    tempo: "1 ação",
+    alcance: "27 metros",
+    comp: "V, S",
+    duracao: "Instantânea",
+    texto: "Você distorce magicamente o espaço ao redor de outra criatura que você possa ver dentro do alcance. O alvo deve ser bem-sucedido em um teste de resistência de Constituição (o alvo pode escolher falhar), ou será teletransportado para um espaço desocupado à sua escolha que você possa ver dentro do alcance. O espaço escolhido deve estar em uma superfície ou em um líquido que possa sustentar o alvo sem que ele precise se espremer.",
+    niveis: "Quando você conjurar essa magia usando um espaço de magia de 3º nível ou superior, o alcance da magia aumenta em 9 metros para cada nível do espaço acima do 2º."
+  },
+  {
+    nome: "Distorcer Valor",
+    sinonimos: "Distort Value",
+    hb: false,
+    nivel: 1,
+    escola: "Ilusão",
+    ritual: false,
+    classes: "Bardo, Bruxo, Feiticeiro, Mago",
+    tempo: "1 minuto",
+    alcance: "Toque",
+    comp: "V",
+    duracao: "8 horas",
+    texto: "Você precisa arrancar algumas peças de ouro a mais de um mercador ao tentar vender aquela estátua estranha de polvo que você libertou do templo do caos? Precisa minimizar o valor de alguns bens mágicos quando o cobrador de impostos aparece? Distorcer valor resolve o seu problema.\n\nVocê conjura essa magia em um objeto com no máximo 30 centímetros de lado, dobrando o valor percebido do objeto ao adicionar ornamentos ou polimento ilusórios a ele, ou reduzindo seu valor percebido pela metade com a ajuda de arranhões, amassados e outras características desagradáveis ilusórias. Qualquer pessoa que examinar o objeto pode determinar seu valor real com um teste bem-sucedido de Inteligência (Investigação) contra a CD para evitar suas magias.",
+    niveis: "Quando você conjurar essa magia usando um espaço de magia de 2º nível ou superior, o tamanho máximo do objeto aumenta em 30 centímetros para cada nível do espaço acima do 1º."
+  },
+  {
     nome: "Doença Plena",
     sinonimos: "Harm",
     hb: false,
@@ -2181,13 +2373,27 @@ window.MAGIAS = [
     texto: "Você introduz uma doença virulenta em uma criatura que você puder ver, dentro do alcance. O alvo deve realizar um teste de resistência de Constituição. Se falhar na resistência, ele sofre 14d6 de dano necrótico ou metade desse dano se obtiver sucesso na resistência. O dano não pode reduzir os pontos de vida do alvo abaixo de 1. Se o alvo falhar no teste de resistência, seu máximo de pontos de vida é reduzido por 1 hora em uma quantidade igual ao dano necrótico causado. Qualquer efeito que remova uma doença permitirá que o máximo de pontos de vida do alvo volte ao normal antes do período indicado."
   },
   {
+    nome: "Dom da Lábia",
+    sinonimos: "Gift of Gab",
+    hb: false,
+    nivel: 2,
+    escola: "Encantamento",
+    ritual: false,
+    classes: "Bardo, Mago",
+    tempo: "1 reação, que você realiza quando fala com outra criatura",
+    alcance: "Pessoal",
+    comp: "V, S, M (2 po)",
+    duracao: "Instantânea",
+    texto: "\"Quando conheci Jim Darkmagic, me perguntei como ele conseguia fazer qualquer coisa naquela roupa. Desde então, aprendi que a maior parte dos talentos dele envolve ficar parado e falar. A roupa dele é perfeita para isso.\"\n\n— Môrgæn\n\nDizem que Jim Darkmagic inventou essa magia, chamando-a originalmente de Eu disse o quê?! Você já esteve conversando com o monarca local e mencionou sem querer como o filho dele se parece com o seu porco favorito de quando você crescia na fazenda da família? Todos nós já passamos por isso! Mas, em vez de ser decapitado por um deslize honesto da língua, você pode fingir que isso nunca aconteceu — garantindo que ninguém saiba que aconteceu.\n\nQuando você conjura essa magia, você remodela habilmente as memórias dos ouvintes em sua área imediata, de modo que cada criatura à sua escolha a até 1,5 metro de você esquece tudo o que você disse nos últimos 6 segundos. Essas criaturas passam a se lembrar de que você na verdade disse as palavras que você pronuncia como o componente verbal da magia."
+  },
+  {
     nome: "Dominar Fera",
     sinonimos: "Dominate Beast; Dominar Besta",
     hb: false,
     nivel: 4,
     escola: "Encantamento",
     concentracao: true,
-    classes: "Druida, Feiticeiro",
+    classes: "Druida, Feiticeiro, Patrulheiro (Opcional)",
     tempo: "1 ação",
     alcance: "18 metros",
     comp: "V, S",
@@ -2273,7 +2479,7 @@ window.MAGIAS = [
     nivel: 9,
     escola: "Ilusão",
     concentracao: true,
-    classes: "Mago",
+    classes: "Bruxo (Opcional), Mago",
     tempo: "1 ação",
     alcance: "36 metros",
     comp: "V, S",
@@ -2465,7 +2671,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 4,
     escola: "Evocação",
-    classes: "Mago",
+    classes: "Druida (Opcional), Feiticeiro (Opcional), Mago",
     tempo: "1 ação",
     alcance: "Pessoal",
     comp: "V, S, M (um pouco de fósforo ou um vaga-lume)",
@@ -2534,7 +2740,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 6,
     escola: "Evocação",
-    classes: "Mago",
+    classes: "Feiticeiro (Opcional), Mago",
     tempo: "1 ação",
     alcance: "90 metros",
     comp: "V, S, M (uma pequena esfera de cristal)",
@@ -2549,7 +2755,7 @@ window.MAGIAS = [
     nivel: 2,
     escola: "Conjuração",
     concentracao: true,
-    classes: "Druida, Mago",
+    classes: "Druida, Feiticeiro (Opcional), Mago",
     tempo: "1 ação",
     alcance: "18 metros",
     comp: "V, S, M (um pouco de sebo, uma pitada de enxofre e uma camada de pó de ferro)",
@@ -2655,7 +2861,8 @@ window.MAGIAS = [
     alcance: "18 metros",
     comp: "V, S",
     duracao: "Instantânea",
-    texto: "Você arremessa uma bolha de ácido. Escolha uma criatura dentro do alcance, ou escolha duas criaturas dentro do alcance que estejam a 1,5 metro uma da outra. Um alvo deve ser bem sucedido num teste de resistência de Destreza ou sofrerá 1d6 de dano ácido.\n\nO dano dessa magia aumenta em 1d6 quando você alcança o 5° nível (2d6), 11° nível (3d6) e 17° nível (4d6).",
+    texto: "Você arremessa uma bolha de ácido. Escolha uma criatura dentro do alcance, ou escolha duas criaturas dentro do alcance que estejam a 1,5 metro uma da outra. Um alvo deve ser bem sucedido num teste de resistência de Destreza ou sofrerá 1d6 de dano ácido.",
+    niveis: "O dano dessa magia aumenta em 1d6 quando você alcança o 5° nível (2d6), 11° nível (3d6) e 17° nível (4d6).",
     sinonimos: "Acid Splash"
   },
   {
@@ -2700,6 +2907,20 @@ window.MAGIAS = [
     texto: "Você escolhe um ponto dentro do alcance e faz com que a energia psíquica exploda lá. Cada criatura em uma esfera de 6 metros de raio centrada nesse ponto deve fazer um teste de resistência de Inteligência. Uma criatura com uma pontuação de Inteligência de 2 ou inferior não pode ser afetada por esta magia. Um alvo leva 8d6 de dano psíquico em um teste de resistência falho, ou metade de dano em um bem sucedido.\n\nApós um teste de resistência falho, um alvo tem pensamentos confusos por 1 minuto. Durante esse período, ele rola um d6 e subtrai o número rolado de todos os suas rolagens de ataque e verificações de habilidade, bem como seus testes de resistência de Constituição para manter a concentração. O alvo pode fazer um teste de resistência de Inteligência no final de cada uma de seus turnos, terminando o efeito sobre si mesmo em um sucesso."
   },
   {
+    nome: "Estrela Negra",
+    sinonimos: "Dark Star",
+    hb: false,
+    nivel: 8,
+    escola: "Evocação",
+    ritual: false,
+    classes: "Mago",
+    tempo: "1 ação",
+    alcance: "45 metros",
+    comp: "V, S, M (um fragmento de ônix e uma gota do sangue do conjurador, ambos consumidos pela magia)",
+    duracao: "Concentração, até 1 minuto",
+    texto: "Essa magia cria uma esfera centrada em um ponto à sua escolha dentro do alcance. A esfera pode ter um raio de até 12 metros. A área dentro dessa esfera é preenchida com escuridão mágica e força gravitacional esmagadora.\n\nPela duração, a área da magia é terreno difícil. Uma criatura com visão no escuro não pode ver através da escuridão mágica, e luz não mágica não pode iluminá-la. Nenhum som pode ser criado dentro ou passar através da área. Qualquer criatura ou objeto inteiramente dentro da esfera é imune a dano trovejante, e as criaturas ficam surdas enquanto estiverem inteiramente dentro dela. Conjurar uma magia que inclua um componente verbal é impossível ali.\n\nQualquer criatura que entrar na área da magia pela primeira vez em um turno ou começar seu turno ali deve fazer um teste de resistência de Constituição. A criatura sofre 8d10 de dano de energia se falhar no teste, ou metade desse dano se obtiver sucesso. Uma criatura reduzida a 0 pontos de vida por esse dano é desintegrada. Uma criatura desintegrada e tudo o que ela estiver vestindo e carregando, exceto itens mágicos, são reduzidos a uma pilha de pó cinza fino."
+  },
+  {
     nome: "Evaporação de Abi-Dalzim",
     sinonimos: "Abi-Dalzim's Horrid Wilting",
     hb: false,
@@ -2718,12 +2939,13 @@ window.MAGIAS = [
     hb: false,
     nivel: 0,
     escola: "Invocação",
-    classes: "Artífice, Feiticeiro, Bruxo, Mago",
+    classes: "Artífice, Feiticeiro (Opcional), Bruxo (Opcional), Mago (Opcional)",
     tempo: "1 ação",
     alcance: "Pessoal (1,5 metro de raio)",
     comp: "V",
     duracao: "Instantânea",
-    texto: "Você cria um círculo momentâneo de lâminas espectrais ao seu redor. Todas as outras criaturas dentro de 1,5 metro de você devem ser bem-sucedidas em uma salvaguarda de Destreza, ou sofrerão 1d6 pontos de dano energético.\n\nO dano desta magia aumenta em 1d6 quando você atinge o 5º nível (2d6), 11º nível (3d6) e 17º nível (4d6)."
+    texto: "Você cria um círculo momentâneo de lâminas espectrais ao seu redor. Todas as outras criaturas dentro de 1,5 metro de você devem ser bem-sucedidas em uma salvaguarda de Destreza, ou sofrerão 1d6 pontos de dano energético.",
+    niveis: "O dano desta magia aumenta em 1d6 quando você atinge o 5º nível (2d6), 11º nível (3d6) e 17º nível (4d6)."
   },
   {
     nome: "Explosão Solar",
@@ -2731,7 +2953,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 8,
     escola: "Evocação",
-    classes: "Druida, Feiticeiro, Mago",
+    classes: "Clérigo (Opcional), Druida, Feiticeiro, Mago",
     tempo: "1 ação",
     alcance: "45 metros",
     comp: "V, S, M (fogo e um pedaço de pedra do sol)",
@@ -2785,7 +3007,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 3,
     escola: "Necromancia",
-    classes: "Bardo, Clérigo",
+    classes: "Bardo, Clérigo, Mago (Opcional)",
     tempo: "1 ação",
     alcance: "3 metros",
     comp: "V, S, M (incenso aceso)",
@@ -2804,6 +3026,50 @@ window.MAGIAS = [
     comp: "V, S",
     duracao: "10 minutos",
     texto: "Você imbui as plantas a até 9 metros de você com consciência e animação limitadas, dando-lhes a habilidade de se comunicar com você e seguir seus comandos simples. Você pode perguntar às plantas sobre eventos na área da magia, acontecidos desde o dia anterior, recebendo informações sobre criaturas que passaram, clima e outras circunstâncias.\n\nVocê também pode tornar terreno difícil causado pelo crescimento de plantas (como arbustos e vegetação rasteira) em terreno normal, permanecendo assim pela duração. Ou você pode tornar terreno normal onde as plantas estiverem presentes em terreno difícil, permanecendo assim pela duração, fazendo as vinhas e ramos atrasarem perseguidores, por exemplo.\n\nAs plantas podem ser capazes de realizar outras tarefas em seu favor, a critério do Mestre. A magia não permite que as plantas desenraizem-se e se movam, mas elas podem mover, livremente, seus ramos, galhos e caules.\n\nSe uma criatura planta estiver na área, você pode se comunicar com ela se você partilhar um idioma em comum, mas você não recebe qualquer habilidade mágica para influenciá-la.\n\nEssa magia pode fazer as plantas criadas pela magia constrição soltarem uma criatura impedida."
+  },
+  {
+    nome: "Farpas Prateadas",
+    sinonimos: "Silvery Barbs",
+    hb: false,
+    nivel: 1,
+    escola: "Encantamento",
+    ritual: false,
+    classes: "Bardo, Feiticeiro, Mago",
+    tempo: "1 reação, que você realiza quando uma criatura que você possa ver a até 18 metros de você é bem-sucedida em uma jogada de ataque, teste de habilidade ou teste de resistência",
+    alcance: "18 metros",
+    comp: "V",
+    duracao: "Instantânea",
+    texto: "Você distrai magicamente a criatura desencadeadora e transforma a incerteza momentânea dela em encorajamento para outra criatura. A criatura desencadeadora deve rolar novamente o d20 e usar o resultado mais baixo.\n\nEm seguida, você pode escolher uma criatura diferente que possa ver dentro do alcance (você pode escolher a si mesmo). A criatura escolhida tem vantagem na próxima jogada de ataque, teste de habilidade ou teste de resistência que fizer dentro de 1 minuto. Uma criatura só pode ser fortalecida por um uso dessa magia por vez."
+  },
+  {
+    nome: "Favor da Fortuna",
+    sinonimos: "Fortune's Favor",
+    hb: false,
+    nivel: 2,
+    escola: "Adivinhação",
+    ritual: false,
+    classes: "Mago",
+    tempo: "1 minuto",
+    alcance: "18 metros",
+    comp: "V, S, M (uma pérola branca que valha no mínimo 100 po, que a magia consome)",
+    duracao: "1 hora",
+    texto: "Você concede sorte latente a si mesmo ou a uma criatura voluntária que possa ver dentro do alcance. Quando a criatura escolhida fizer uma jogada de ataque, um teste de habilidade ou um teste de resistência antes que a magia termine, ela pode dissipar essa magia em si mesma para rolar um d20 adicional e escolher qual dos d20s usar. Alternativamente, quando uma jogada de ataque for feita contra a criatura escolhida, ela pode dissipar essa magia em si mesma para rolar um d20 e escolher qual dos d20s usar, o que ela rolou ou o que o atacante rolou.\n\nSe a rolagem original de d20 tiver vantagem ou desvantagem, a criatura rola o d20 adicional depois que a vantagem ou desvantagem tiver sido aplicada à rolagem original.",
+    niveis: "Quando você conjurar essa magia usando um espaço de magia de 3º nível ou superior, você pode escolher uma criatura adicional como alvo para cada nível do espaço acima do 2º."
+  },
+  {
+    nome: "Fissura Gravitacional",
+    sinonimos: "Gravity Fissure",
+    hb: false,
+    nivel: 6,
+    escola: "Evocação",
+    ritual: false,
+    classes: "Mago",
+    tempo: "1 ação",
+    alcance: "Pessoal",
+    comp: "V, S, M (um punhado de limalha de ferro)",
+    duracao: "Instantânea",
+    texto: "Você manifesta uma ravina de energia gravitacional em uma linha originada de você com 30 metros de comprimento e 1,5 metro de largura. Cada criatura nessa linha deve fazer um teste de resistência de Constituição, sofrendo 8d8 de dano de energia se falhar no teste, ou metade desse dano se obtiver sucesso.\n\nCada criatura a até 3 metros da linha, mas fora dela, deve ser bem-sucedida em um teste de resistência de Constituição ou sofrerá 8d8 de dano de energia e será puxada em direção à linha até que a criatura esteja na área dela.",
+    niveis: "Quando você conjurar essa magia usando um espaço de magia de 7º nível ou superior, o dano aumenta em 1d8 para cada nível do espaço acima do 6º."
   },
   {
     nome: "Flecha Ácida de Melf",
@@ -2968,7 +3234,7 @@ window.MAGIAS = [
     nivel: 3,
     escola: "Abjuração",
     concentracao: true,
-    classes: "Artífice, Bardo, Bruxo, Feiticeiro, Mago",
+    classes: "Artífice, Bardo (Opcional), Bruxo (Opcional), Feiticeiro (Opcional), Mago (Opcional)",
     tempo: "1 ação",
     alcance: "9 metros",
     comp: "V",
@@ -3085,7 +3351,8 @@ window.MAGIAS = [
     alcance: "Pessoal",
     comp: "S",
     duracao: "Instantânea",
-    texto: "Você cria uma violenta explosão sonora, que pode ser ouvida a até 30 metros de distância. Cada criatura diferente de você a até 1,5 metros de você deve realizar um teste de resistência de Constituição. Se falhar na resistência, o alvo sofre 1d6 de dano trovejante.\n\nO dano da magia aumenta em 1d6 quando você alcança o 5° nível (2d6), 11° nível (3d6) e 17° nível (4d6)."
+    texto: "Você cria uma violenta explosão sonora, que pode ser ouvida a até 30 metros de distância. Cada criatura diferente de você a até 1,5 metros de você deve realizar um teste de resistência de Constituição. Se falhar na resistência, o alvo sofre 1d6 de dano trovejante.",
+    niveis: "O dano da magia aumenta em 1d6 quando você alcança o 5° nível (2d6), 11° nível (3d6) e 17° nível (4d6)."
   },
   {
     nome: "Grito Psíquico",
@@ -3269,6 +3536,20 @@ window.MAGIAS = [
     texto: "Chamas rodeiam uma criatura que você possa ver, dentro do alcance. O alvo deve realizar um teste de resistência de Destreza. Ele sofre 7d6 de dano de fogo se falhar na resistência, ou metade desse dano se obtiver sucesso. Se falhar na resistência, o alvo também se incendeia pela duração da magia. O alvo em chamas emite luz plena num raio de 9 metros e penumbra por 9 metros adicionais. No final de cada um dos turnos dele, o alvo repete o teste de resistência. Ele sofre 3d6 de dano de fogo se falhar na resistência e a magia termina com um sucesso. Essas chamas mágicas não podem ser extintas através de meios não mágicos.\n\nSe o dano dessa magia reduzir um alvo a 0 pontos de vida, ele é transformado em cinzas."
   },
   {
+    nome: "Incitar Ganância",
+    sinonimos: "Incite Greed",
+    hb: false,
+    nivel: 3,
+    escola: "Encantamento",
+    ritual: false,
+    classes: "Bruxo, Clérigo, Feiticeiro, Mago",
+    tempo: "1 ação",
+    alcance: "9 metros",
+    comp: "V, S, M (uma gema que valha no mínimo 50 po)",
+    duracao: "Concentração, até 1 minuto",
+    texto: "Quando você conjura essa magia, você apresenta a gema usada como componente material e escolhe qualquer número de criaturas dentro do alcance que possam ver você. Cada alvo deve ser bem-sucedido em um teste de resistência de Sabedoria ou ficará enfeitiçado por você até a magia terminar, ou até você ou seus companheiros fazerem algo prejudicial a ele. Enquanto estiver enfeitiçada dessa forma, uma criatura não pode fazer nada além de usar seu movimento para se aproximar de você de maneira segura. Enquanto uma criatura afetada estiver a até 1,5 metro de você, ela não pode se mover, mas simplesmente encara com ganância a gema que você apresenta.\n\nNo final de cada um dos turnos dela, um alvo afetado pode fazer um teste de resistência de Sabedoria. Se obtiver sucesso, esse efeito termina para aquele alvo."
+  },
+  {
     nome: "Infestação",
     sinonimos: "Infestation",
     hb: false,
@@ -3279,7 +3560,8 @@ window.MAGIAS = [
     alcance: "9 metros",
     comp: "V, S, M (uma pulga viva)",
     duracao: "Instantânea",
-    texto: "Você provoca uma nuvem de ácaros, pulgas e outros parasitas a aparecer momentaneamente sobre uma criatura que você pode ver dentro alcance. O alvo deve ser bem-sucedido em teste de resistência de Constituição, ou sofre 1d6 de dano de veneno e se move 1,5 metros em uma direção aleatória, se ele pode se mover e sua velocidade é de pelo menos 1,5 metros. Role um d4 pela direção: 1, norte; 2, sul; 3, leste; ou 4, oeste. Este movimento não provoca ataques de oportunidade, e se a direção rolada estiver bloqueada, o alvo não se move.\n\nO dano da magia aumenta em 1d6 quando você alcança 5° nível (2d6), 11° nível (3d6) e 17° nível (4d6)."
+    texto: "Você provoca uma nuvem de ácaros, pulgas e outros parasitas a aparecer momentaneamente sobre uma criatura que você pode ver dentro alcance. O alvo deve ser bem-sucedido em teste de resistência de Constituição, ou sofre 1d6 de dano de veneno e se move 1,5 metros em uma direção aleatória, se ele pode se mover e sua velocidade é de pelo menos 1,5 metros. Role um d4 pela direção: 1, norte; 2, sul; 3, leste; ou 4, oeste. Este movimento não provoca ataques de oportunidade, e se a direção rolada estiver bloqueada, o alvo não se move.",
+    niveis: "O dano da magia aumenta em 1d6 quando você alcança 5° nível (2d6), 11° nível (3d6) e 17° nível (4d6)."
   },
   {
     nome: "Infestar de Inimigos",
@@ -3316,7 +3598,7 @@ window.MAGIAS = [
     nivel: 1,
     escola: "Evocação",
     concentracao: true,
-    classes: "Artífice, Feiticeiro, Mago",
+    classes: "Artífice, Feiticeiro (Opcional), Mago (Opcional)",
     tempo: "1 ação",
     alcance: "Pessoal (linha de 9 metros)",
     comp: "V, S, M (um pouco de comida podre)",
@@ -3415,7 +3697,7 @@ window.MAGIAS = [
     nivel: 4,
     escola: "Conjuração",
     concentracao: true,
-    classes: "Bruxo, Mago",
+    classes: "Bruxo (Opcional), Mago (Opcional)",
     tempo: "1 ação",
     alcance: "27 metros",
     comp: "V, S, M (um tentáculo em conserva e um globo ocular dentro de um frasco banhado a platina no valor mínimo de 400 PO)",
@@ -3430,7 +3712,7 @@ window.MAGIAS = [
     nivel: 5,
     escola: "Conjuração",
     concentracao: true,
-    classes: "Clérigo, Paladino",
+    classes: "Clérigo (Opcional), Paladino (Opcional)",
     tempo: "1 ação",
     alcance: "27 metros",
     comp: "V, S, M (um relicário de ouro com valor mínimo de 500 PO)",
@@ -3445,7 +3727,7 @@ window.MAGIAS = [
     nivel: 4,
     escola: "Conjuração",
     concentracao: true,
-    classes: "Artífice, Mago",
+    classes: "Artífice, Mago (Opcional)",
     tempo: "1 ação",
     alcance: "27 metros",
     comp: "V, S, M (uma pedra ornamentada e um porta-joias de metal, no valor mínimo de 400 PO)",
@@ -3460,7 +3742,7 @@ window.MAGIAS = [
     nivel: 3,
     escola: "Conjuração",
     concentracao: true,
-    classes: "Bruxo, Mago",
+    classes: "Bruxo (Opcional), Mago (Opcional)",
     tempo: "1 ação",
     alcance: "27 metros",
     comp: "V, S, M (lágrimas dentro de uma gema com valor mínimo de 300 PO)",
@@ -3475,7 +3757,7 @@ window.MAGIAS = [
     nivel: 4,
     escola: "Conjuração",
     concentracao: true,
-    classes: "Bruxo, Mago",
+    classes: "Bruxo (Opcional), Mago",
     tempo: "1 ação",
     alcance: "18 metros",
     comp: "V, S, M (um frasco de sangue de um humanoide morto nas últimas 24 horas)",
@@ -3505,7 +3787,7 @@ window.MAGIAS = [
     nivel: 4,
     escola: "Conjuração",
     concentracao: true,
-    classes: "Druida, Mago, Patrulheiro",
+    classes: "Druida (Opcional), Mago (Opcional), Patrulheiro (Opcional)",
     tempo: "1 ação",
     alcance: "27 metros",
     comp: "V, S, M (ar, cinzas, água e um seixo dentro de um frasco banhado em ouro com valor mínimo de 400 PO)",
@@ -3520,7 +3802,7 @@ window.MAGIAS = [
     nivel: 3,
     escola: "Conjuração",
     concentracao: true,
-    classes: "Bruxo, Druida, Mago, Patrulheiro",
+    classes: "Bruxo (Opcional), Druida (Opcional), Mago (Opcional), Patrulheiro (Opcional)",
     tempo: "1 ação",
     alcance: "27 metros",
     comp: "V, S, M (uma flor dourada com valor mínimo de 300 PO)",
@@ -3535,7 +3817,7 @@ window.MAGIAS = [
     nivel: 2,
     escola: "Conjuração",
     concentracao: true,
-    classes: "Druida, Patrulheiro",
+    classes: "Druida (Opcional), Patrulheiro (Opcional)",
     tempo: "1 ação",
     alcance: "27 metros",
     comp: "V, S, M (uma pena, um tufo de pelo e um rabo de peixe dentro de uma bolota folheada a ouro, com valor mínimo de 200 PO)",
@@ -3550,7 +3832,7 @@ window.MAGIAS = [
     nivel: 6,
     escola: "Conjuração",
     concentracao: true,
-    classes: "Bruxo, Mago",
+    classes: "Bruxo (Opcional), Mago (Opcional)",
     tempo: "1 ação",
     alcance: "27 metros",
     comp: "V, S, M (sangue de humanoide dentro de um frasco de rubi com valor mínimo de 600 PO)",
@@ -3565,7 +3847,7 @@ window.MAGIAS = [
     nivel: 3,
     escola: "Necromancia",
     concentracao: true,
-    classes: "Bruxo, Mago",
+    classes: "Bruxo (Opcional), Mago (Opcional)",
     tempo: "1 ação",
     alcance: "27 metros",
     comp: "V, S, M (um crânio dourado com valor mínimo de 300 PO)",
@@ -3647,12 +3929,13 @@ window.MAGIAS = [
     hb: false,
     nivel: 0,
     escola: "Evocação",
-    classes: "Artífice, Feiticeiro, Bruxo, Mago",
+    classes: "Artífice, Feiticeiro (Opcional), Bruxo (Opcional), Mago (Opcional)",
     tempo: "1 ação",
     alcance: "Pessoal (4,5 metros de raio)",
     comp: "S, M (uma arma de combate corpo a corpo com valor mínimo de 1 PP)",
     duracao: "Instantânea",
-    texto: "Você empunha a arma usada na conjuração da magia e realiza um ataque corpo a corpo contra uma criatura que esteja a até 1,5 m de você. Se acertar, o alvo sofre os efeitos normais do ataque da arma, e você pode fazer com que um fogo esverdeado salte do alvo para uma outra criatura à sua escolha, que você possa ver e que esteja a até 1,5 metro dele. A segunda criatura sofre dano ígneo igual ao seu modificador de atributo de conjuração.\n\nO dano desta magia aumenta quando você atinge certos níveis. No 5º nível, o ataque corpo a corpo causa 1d8 pontos de dano ígneo adicionais, e o dano ígneo que o segundo alvo sofre aumenta para 1d8 + seu modificador de atributo de conjuração. Ambas as jogadas de dano aumentam em 1d8 no 11º nível (2d8 e 2d8) e novamente no 17º nível (3d8 e 3d8)."
+    texto: "Você empunha a arma usada na conjuração da magia e realiza um ataque corpo a corpo contra uma criatura que esteja a até 1,5 m de você. Se acertar, o alvo sofre os efeitos normais do ataque da arma, e você pode fazer com que um fogo esverdeado salte do alvo para uma outra criatura à sua escolha, que você possa ver e que esteja a até 1,5 metro dele. A segunda criatura sofre dano ígneo igual ao seu modificador de atributo de conjuração.",
+    niveis: "O dano desta magia aumenta quando você atinge certos níveis. No 5º nível, o ataque corpo a corpo causa 1d8 pontos de dano ígneo adicionais, e o dano ígneo que o segundo alvo sofre aumenta para 1d8 + seu modificador de atributo de conjuração. Ambas as jogadas de dano aumentam em 1d8 no 11º nível (2d8 e 2d8) e novamente no 17º nível (3d8 e 3d8)."
   },
   {
     nome: "Lâmina do Desastre",
@@ -3661,7 +3944,7 @@ window.MAGIAS = [
     nivel: 9,
     escola: "Conjuração",
     concentracao: true,
-    classes: "Feiticeiro, Bruxo, Mago",
+    classes: "Bruxo (Opcional), Feiticeiro (Opcional), Mago (Opcional)",
     tempo: "1 ação bônus",
     alcance: "18 metros",
     comp: "V, S",
@@ -3675,7 +3958,7 @@ window.MAGIAS = [
     nivel: 2,
     escola: "Evocação",
     concentracao: true,
-    classes: "Druida",
+    classes: "Druida, Feiticeiro (Opcional)",
     tempo: "1 ação bônus",
     alcance: "Pessoal",
     comp: "V, S, M (folha de sumagre)",
@@ -3704,12 +3987,13 @@ window.MAGIAS = [
     hb: false,
     nivel: 0,
     escola: "Evocação",
-    classes: "Artífice, Feiticeiro, Bruxo, Mago",
+    classes: "Artífice, Feiticeiro (Opcional), Bruxo (Opcional), Mago (Opcional)",
     tempo: "1 ação",
     alcance: "Pessoal (4,5 metros de raio)",
     comp: "S, M (uma arma de combate corpo a corpo com valor mínimo de 1 PP)",
     duracao: "1 rodada",
-    texto: "Você empunha a arma usada na conjuração da magia e realiza um ataque corpo a corpo contra uma criatura que esteja a até de 1,5 m de você. Se acertar, o alvo sofre os efeitos normais do ataque da arma e então fica envolto em energia explosiva até o início de seu próximo turno. Se o alvo se mover voluntariamente 1,5 m ou mais antes disso, sofre 1d8 pontos de dano trovejante e a magia se encerra.\n\nO dano desta magia aumenta quando você atinge certos níveis. No 5º nível, o ataque corpo a corpo causa 1d8 pontos de dano trovejante adicionais e o dano que o alvo sofre ao se mover aumenta para 2d8. Ambas as jogadas de dano aumentam em 1d8 no 11º nível (2d8 e 3d8) e novamente no 17º nível (3d8 e 4d8)."
+    texto: "Você empunha a arma usada na conjuração da magia e realiza um ataque corpo a corpo contra uma criatura que esteja a até de 1,5 m de você. Se acertar, o alvo sofre os efeitos normais do ataque da arma e então fica envolto em energia explosiva até o início de seu próximo turno. Se o alvo se mover voluntariamente 1,5 m ou mais antes disso, sofre 1d8 pontos de dano trovejante e a magia se encerra.",
+    niveis: "O dano desta magia aumenta quando você atinge certos níveis. No 5º nível, o ataque corpo a corpo causa 1d8 pontos de dano trovejante adicionais e o dano que o alvo sofre ao se mover aumenta para 2d8. Ambas as jogadas de dano aumentam em 1d8 no 11º nível (2d8 e 3d8) e novamente no 17º nível (3d8 e 4d8)."
   },
   {
     nome: "Lentidão",
@@ -3718,7 +4002,7 @@ window.MAGIAS = [
     nivel: 3,
     escola: "Transmutação",
     concentracao: true,
-    classes: "Feiticeiro, Mago",
+    classes: "Bardo (Opcional), Feiticeiro, Mago",
     tempo: "1 ação",
     alcance: "36 metros",
     comp: "V, S, M (uma gota de melaço)",
@@ -3731,7 +4015,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 1,
     escola: "Ilusão",
-    classes: "Feiticeiro, Mago",
+    classes: "Bardo (Opcional), Feiticeiro, Mago",
     tempo: "1 ação",
     alcance: "Pessoal (cone de 4,5 metros)",
     comp: "V, S, M (um punhado de pó ou areia nas cores vermelha, amarela e azul)",
@@ -3760,7 +4044,7 @@ window.MAGIAS = [
     nivel: 5,
     escola: "Adivinhação",
     ritual: true,
-    classes: "Mago",
+    classes: "Bardo (Opcional), Mago",
     tempo: "1 ação",
     alcance: "9 metros",
     comp: "V, S, M (pedaços de cascas de ovos de dois tipos diferentes de criatura)",
@@ -3855,7 +4139,7 @@ window.MAGIAS = [
     nivel: 2,
     escola: "Evocação",
     concentracao: true,
-    classes: "Druida, Feiticeiro, Mago",
+    classes: "Druida, Feiticeiro, Mago, Patrulheiro (Opcional)",
     tempo: "1 ação",
     alcance: "Pessoal (linha de 18 metros)",
     comp: "V, S, M (uma semente de legume)",
@@ -3887,6 +4171,21 @@ window.MAGIAS = [
     comp: "V, S",
     duracao: "1 hora",
     texto: "Uma esfera de luz, com 18 metros de raio, se espalha a partir de um ponto, à sua escolha, dentro do alcance. A esfera produz luz plena num raio de 18 metros e penumbra por 18 metros adicionais.\n\nSe você escolher um ponto em um objeto que você esteja segurando, ou um que não esteja sendo vestido ou carregado, a luz brilha a partir do objeto e se move com ele. Cobrir completamente o objeto afetado com um objeto opaco, como uma vasilha ou um elmo, bloqueará a luz.\n\nSe qualquer área dessa magia sobrepor uma área de escuridão criada por uma magia de 3° ou inferior, a magia que criou a escuridão será dissipada."
+  },
+  {
+    nome: "Magnificar Gravidade",
+    sinonimos: "Magnify Gravity",
+    hb: false,
+    nivel: 1,
+    escola: "Transmutação",
+    ritual: false,
+    classes: "Mago",
+    tempo: "1 ação",
+    alcance: "18 metros",
+    comp: "V, S",
+    duracao: "1 rodada",
+    texto: "A gravidade em uma esfera de 3 metros de raio centrada em um ponto que você possa ver dentro do alcance aumenta por um momento. Cada criatura na esfera no turno em que você conjurar a magia deve fazer um teste de resistência de Constituição. Se falhar no teste, uma criatura sofre 2d8 de dano de energia e seu deslocamento é reduzido à metade até o final do próximo turno dela. Se obtiver sucesso, a criatura sofre metade desse dano e não sofre redução em seu deslocamento.\n\nAté o início do seu próximo turno, qualquer objeto na esfera que não esteja sendo vestido ou carregado exige um teste bem-sucedido de Força contra a CD para evitar suas magias para ser apanhado ou movido.",
+    niveis: "Quando você conjurar essa magia usando um espaço de magia de 2º nível ou superior, o dano aumenta em 1d8 para cada nível do espaço acima do 1º."
   },
   {
     nome: "Malogro",
@@ -3992,7 +4291,7 @@ window.MAGIAS = [
     nivel: 3,
     escola: "Necromancia",
     concentracao: true,
-    classes: "Clérigo, Paladino",
+    classes: "Bruxo (Opcional), Clérigo (Opcional), Mago (Opcional), Paladino (Opcional)",
     tempo: "1 ação bônus",
     alcance: "Pessoal",
     comp: "V, S",
@@ -4007,7 +4306,7 @@ window.MAGIAS = [
     nivel: 5,
     escola: "Evocação",
     concentracao: true,
-    classes: "Mago",
+    classes: "Artífice, Feiticeiro (Opcional), Mago",
     tempo: "1 ação",
     alcance: "36 metros",
     comp: "V, S, M (uma casca de ovo e uma luva de couro de cobra)",
@@ -4115,6 +4414,21 @@ window.MAGIAS = [
     niveis: "Se você conjurar essa magia usando um espaço de magia de 3° nível ou superior, a duração da magia aumenta em 48 horas para cada nível do espaço acima do 2°."
   },
   {
+    nome: "Mensageiro Veloz de Galder",
+    sinonimos: "Galder's Speedy Courier",
+    hb: false,
+    nivel: 4,
+    escola: "Conjuração",
+    ritual: false,
+    classes: "Bruxo, Mago",
+    tempo: "1 ação",
+    alcance: "3 metros",
+    comp: "V, S, M (25 peças de ouro, ou bens minerais de valor equivalente, que a magia consome)",
+    duracao: "10 minutos",
+    texto: "Você invoca um elemental do ar Pequeno em um ponto dentro do alcance. O elemental do ar não tem forma, é quase transparente, imune a todo dano e não pode interagir com outras criaturas ou objetos. Ele carrega um baú aberto e vazio cujas dimensões internas são de 90 centímetros de lado. Enquanto a magia durar, você pode depositar quantos itens couberem dentro do baú. Em seguida, você pode nomear uma criatura viva que já tenha encontrado e visto pelo menos uma vez antes, ou qualquer criatura da qual você possua uma parte do corpo, mecha de cabelo, apara de unha ou porção semelhante do corpo da criatura.\n\nAssim que a tampa do baú é fechada, o elemental e o baú desaparecem e reaparecem adjacentes à criatura alvo. Se a criatura alvo estiver em outro plano, ou se estiver protegida contra detecção ou localização mágica, o conteúdo do baú reaparece no chão aos seus pés.\n\nA criatura alvo toma ciência do conteúdo do baú antes de escolher se vai abri-lo ou não, e sabe quanto tempo resta da duração da magia para poder recuperá-lo. Nenhuma outra criatura pode abrir o baú e recuperar seu conteúdo. Quando a magia expira ou quando todo o conteúdo do baú tiver sido removido, o elemental e o baú desaparecem. O elemental também desaparece se a criatura alvo ordenar que ele devolva os itens a você. Quando o elemental desaparece, quaisquer itens não retirados do baú reaparecem no chão aos seus pés.",
+    niveis: "Quando você conjurar essa magia usando um espaço de magia de 8º nível, você pode enviar o baú para uma criatura em um plano de existência diferente do seu."
+  },
+  {
     nome: "Mensagem",
     sinonimos: "Message",
     hb: false,
@@ -4134,7 +4448,7 @@ window.MAGIAS = [
     nivel: 3,
     escola: "Transmutação",
     ritual: true,
-    classes: "Clérigo, Druida",
+    classes: "Clérigo, Druida, Patrulheiro (Opcional)",
     tempo: "1 ação",
     alcance: "Toque",
     comp: "V, S",
@@ -4143,7 +4457,7 @@ window.MAGIAS = [
   },
   {
     nome: "Metamorfose",
-    sinonimos: "Polymorph; Polimorfia",
+    sinonimos: "Polymorph; Polimorfia; Polimorfismo",
     hb: false,
     nivel: 4,
     escola: "Transmutação",
@@ -4157,7 +4471,7 @@ window.MAGIAS = [
   },
   {
     nome: "Metamorfose em Massa",
-    sinonimos: "Mass Polymorph; Polimorfia em Massa",
+    sinonimos: "Mass Polymorph; Polimorfia em Massa; Polimorfismo em Massa",
     hb: false,
     nivel: 9,
     escola: "Transmutação",
@@ -4171,7 +4485,7 @@ window.MAGIAS = [
   },
   {
     nome: "Metamorfose Verdadeira",
-    sinonimos: "True Polymorph; Polimorfia Verdadeira",
+    sinonimos: "True Polymorph; Polimorfia Verdadeira; Polimorfismo Verdadeiro",
     hb: false,
     nivel: 9,
     escola: "Transmutação",
@@ -4240,6 +4554,21 @@ window.MAGIAS = [
     niveis: "Quando você conjurar essa magia usando um espaço de magia de 2° nível ou superior, a magia cria um dardo adicional para cada nível do espaço acima do 1°."
   },
   {
+    nome: "Mísseis Mágicos de Jim",
+    sinonimos: "Jim's Magic Missile",
+    hb: false,
+    nivel: 1,
+    escola: "Evocação",
+    ritual: false,
+    classes: "Mago",
+    tempo: "1 ação",
+    alcance: "36 metros",
+    comp: "V, S, M (1 po)",
+    duracao: "Instantânea",
+    texto: "\"Mísseis mágicos de Jim é uma magia antiga e poderosa, além de ser o nome da minha banda na Academia de Magia.\"\n\n— Jim Darkmagic\n\nQualquer aprendiz de mago pode conjurar um velho e entediante mísseis mágicos. Claro, ele sempre acerta o alvo. Que tédio. Livre-se da monotonia da magia do seu avô com essa versão aprimorada da magia, como usada por Jim Darkmagic!\n\nVocê cria três dardos retorcidos, assobiantes, hipoalergênicos e sem glúten de energia mágica. Cada dardo tem como alvo uma criatura à sua escolha que você possa ver dentro do alcance. Faça um ataque mágico à distância para cada míssil. Ao acertar, um míssil causa 2d4 de dano de energia ao alvo.\n\nSe a jogada de ataque obtiver um acerto crítico, o alvo daquele míssil sofre 5d4 de dano de energia em vez de você rolar o dano duas vezes para um acerto crítico. Se a jogada de ataque para qualquer míssil for 1, todos os mísseis erram seus alvos e explodem no seu rosto, causando 1 de dano de energia por míssil a você.",
+    niveis: "Quando você conjurar essa magia usando um espaço de magia de 2º nível ou superior, a magia cria um dardo adicional, e o componente de direitos autorais aumenta em 1 po, para cada nível do espaço acima do 1º."
+  },
+  {
     nome: "Modificar Memória",
     sinonimos: "Modify Memory",
     hb: false,
@@ -4253,6 +4582,20 @@ window.MAGIAS = [
     duracao: "Concentração, até 1 minuto",
     texto: "Você tenta modelar as memórias de outra criatura. Uma criatura que você possa ver deve realizar um teste de resistência de Sabedoria. Se você estiver lutando com a criatura, ela terá vantagem no teste de resistência. Se falhar na resistência, o alvo fica enfeitiçado por você pela duração. O alvo enfeitiçado está incapacitado e não sabe o que está acontecendo ao seu redor, apesar de ainda poder ouvir você. Se ele sofrer qualquer dano ou for alvo de outra magia, essa magia acaba, e nenhuma das memórias do alvo é modificada.\n\nEnquanto esse feitiço durar, você pode afetar a memória sobre um evento de que o alvo participou nas últimas 24 horas e que não tenha durado mais de 10 minutos. Você pode, permanentemente, eliminar todas as memórias desse evento, permitir que o alvo relembre do evento com perfeita clareza e riqueza de detalhes, mudar sua memória sobre os detalhes do evento ou criar uma memória de outro evento qualquer.\n\nVocê deve falar ao alvo para descrever como sua memória é afetada e ele deve ser capaz de compreender seu idioma para que as memórias modificadas se enraízem. A mente dele preenche qualquer lacuna nos detalhes da sua descrição. Se a magia terminar antes de você ter finalizado a descrição das memórias modificadas, a memória da criatura não será alterada. Do contrário, as memórias modificadas tomam lugar quando a magia acabar.\n\nUma memória modificada não afeta, necessariamente, como uma criatura se comporta, particularmente se a memória contradiz as inclinações, tendência ou crenças naturais da criatura. Uma modificação ilógica na memória, como implantar uma memória de como a criatura gosta de se encharcar de ácido, é repudiada, talvez como um sonho ruim. O Mestre pode considerar uma modificação na memória muito absurda para afetar uma criatura de uma forma significativa.\n\nUma magia remover maldição ou restauração maior, conjurada no alvo, restaura a verdadeira memória da criatura.",
     niveis: "Se você conjurar essa magia usando um espaço de magia de 6° nível ou superior, você pode alterar a memória do alvo de um evento que aconteceu a até 7 dias atrás (6° nível), 30 dias atrás (7° nível), 1 ano atrás (8° nível) ou em qualquer momento do passado da criatura (9° nível)."
+  },
+  {
+    nome: "Moeda Brilhante de Jim",
+    sinonimos: "Jim's Glowing Coin",
+    hb: false,
+    nivel: 2,
+    escola: "Encantamento",
+    ritual: false,
+    classes: "Mago",
+    tempo: "1 ação",
+    alcance: "18 metros",
+    comp: "S, M (uma moeda), R (2 po)",
+    duracao: "1 minuto",
+    texto: "Das muitas táticas empregadas pelo mestre mágico e renomado aventureiro Jim Darkmagic, o velho truque da moeda brilhante é um clássico consagrado pelo tempo. Quando você conjura a magia, você arremessa a moeda que é o componente material da magia para qualquer ponto dentro do alcance. A moeda se ilumina como se estivesse sob o efeito de uma magia luz. Cada criatura à sua escolha que você possa ver a até 9 metros da moeda deve ser bem-sucedida em um teste de resistência de Sabedoria ou ficará distraída pela duração. Enquanto estiver distraída, uma criatura tem desvantagem em testes de Sabedoria (Percepção) e em jogadas de iniciativa."
   },
   {
     nome: "Moldar Água",
@@ -4455,7 +4798,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 9,
     escola: "Abjuração",
-    classes: "Mago",
+    classes: "Bardo (Opcional), Mago",
     tempo: "1 ação",
     alcance: "18 metros",
     comp: "V, S",
@@ -4556,12 +4899,27 @@ window.MAGIAS = [
     nivel: 8,
     escola: "Conjuração",
     concentracao: true,
-    classes: "Feiticeiro, Mago",
+    classes: "Druida (Opcional), Feiticeiro, Mago",
     tempo: "1 ação",
     alcance: "45 metros",
     comp: "V, S",
     duracao: "Concentração, até 1 minuto",
     texto: "Uma nuvem de fumaça rodopiante que dispara brasas incandescentes aparece numa esfera de 6 metros de raio centrada num ponto, dentro do alcance. A nuvem se espalha, dobrando esquinas, e gera escuridão densa. Ela permanece pela duração ou até que um vento de velocidade moderada ou mais forte (pelo menos 15 quilômetros por hora) a disperse.\n\nQuando a nuvem aparece, cada criatura dentro dela deve realizar um teste de resistência de Destreza. Uma criatura sofre 10d8 de dano de fogo se falhar na resistência ou metade desse dano se passar. Uma criatura deve, também, realizar um teste de resistência quando entrar na área da magia pela primeira vez num turno ou terminar seu turno nela.\n\nA nuvem se afasta 3 metros de você numa direção, que você escolheu, no começo de cada um dos seus turnos."
+  },
+  {
+    nome: "Objeto Imóvel",
+    sinonimos: "Immovable Object",
+    hb: false,
+    nivel: 2,
+    escola: "Transmutação",
+    ritual: false,
+    classes: "Mago",
+    tempo: "1 ação",
+    alcance: "Toque",
+    comp: "V, S, M (pó de ouro que valha no mínimo 25 po, que a magia consome)",
+    duracao: "1 hora",
+    texto: "Você toca um objeto que pese no máximo 5 quilos e faz com que ele fique magicamente fixo no lugar. Você e as criaturas que você designar ao conjurar essa magia podem mover o objeto normalmente. Você também pode definir uma senha que, quando pronunciada a até 1,5 metro do objeto, suprime essa magia por 1 minuto.\n\nSe o objeto estiver fixo no ar, ele pode suportar até 2.000 quilos de peso. Mais peso faz com que o objeto caia. Caso contrário, uma criatura pode usar uma ação para fazer um teste de Força contra a CD para evitar suas magias. Se obtiver sucesso, a criatura pode mover o objeto até 3 metros.",
+    niveis: "Se você conjurar essa magia usando um espaço de magia de 4º ou 5º nível, a CD para mover o objeto aumenta em 5, ele pode suportar até 4.000 quilos de peso e a duração aumenta para 24 horas. Se você conjurar essa magia usando um espaço de magia de 6º nível ou superior, a CD para mover o objeto aumenta em 10, ele pode suportar até 10.000 quilos de peso e o efeito é permanente até ser dissipado."
   },
   {
     nome: "Olho Arcano",
@@ -4576,6 +4934,21 @@ window.MAGIAS = [
     comp: "V, S, M (um punhado de pelo de morcego)",
     duracao: "Concentração, até 1 hora",
     texto: "Você cria um olho mágico invisível, dentro do alcance, que flutua no ar pela duração.\n\nVocê mentalmente recebe informações visuais do olho, que possui visão normal e visão no escuro com alcance de 9 metros. O olho pode ver em todas as direções.\n\nCom uma ação, você pode mover o olho até 9 metros em qualquer direção. Não existe limite de quão longe de você o olho pode se mover, mas ele não pode entrar em outro plano de existência. Uma barreira sólida bloqueia o movimento do olho, mas o olho pode passar através de aberturas de até 3 centímetros de diâmetro."
+  },
+  {
+    nome: "Onda de Pulso",
+    sinonimos: "Pulse Wave",
+    hb: false,
+    nivel: 3,
+    escola: "Evocação",
+    ritual: false,
+    classes: "Mago",
+    tempo: "1 ação",
+    alcance: "Pessoal",
+    comp: "V, S",
+    duracao: "Instantânea",
+    texto: "Você cria uma pressão intensa, libera-a em um cone de 9 metros e decide se a pressão puxa ou empurra criaturas e objetos. Cada criatura nesse cone deve fazer um teste de resistência de Constituição. Uma criatura sofre 6d6 de dano de energia se falhar no teste, ou metade desse dano se obtiver sucesso. Além disso, cada criatura que falhar no teste é puxada 4,5 metros em sua direção ou empurrada 4,5 metros para longe de você, dependendo da escolha que você fez para a magia.\n\nAdicionalmente, objetos soltos que estejam completamente dentro do cone são igualmente puxados ou empurrados 4,5 metros.",
+    niveis: "Quando você conjurar essa magia usando um espaço de magia de 4º nível ou superior, o dano aumenta em 1d6 e a distância puxada ou empurrada aumenta em 1,5 metro para cada nível do espaço acima do 3º."
   },
   {
     nome: "Onda Destrutiva",
@@ -4610,7 +4983,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 2,
     escola: "Evocação",
-    classes: "Clérigo",
+    classes: "Clérigo, Paladino (Opcional)",
     tempo: "10 minutos",
     alcance: "9 metros",
     comp: "V",
@@ -4694,7 +5067,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 3,
     escola: "Evocação",
-    classes: "Clérigo",
+    classes: "Bardo (Opcional), Clérigo",
     tempo: "1 ação bônus",
     alcance: "18 metros",
     comp: "V",
@@ -4721,7 +5094,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 9,
     escola: "Evocação",
-    classes: "Bardo",
+    classes: "Bardo, Clérigo (Opcional)",
     tempo: "1 ação",
     alcance: "Toque",
     comp: "V, S",
@@ -4791,7 +5164,8 @@ window.MAGIAS = [
     alcance: "1,5 metros",
     comp: "V, M (um símbolo sagrado)",
     duracao: "Instantânea",
-    texto: "Você profere uma palavra divina e o esplendor ardente explode de você. Cada criatura da sua escolha que você possa ver dentro do alcance deve ter sucesso em um teste de resistência de Constituição ou sofrerá 1d6 de dano radiante.\n\nO dano da magia aumenta em 1d6 quando você alcança o 5° nível (2d6), 11° nível (3d6) e 17° nível (4d6)."
+    texto: "Você profere uma palavra divina e o esplendor ardente explode de você. Cada criatura da sua escolha que você possa ver dentro do alcance deve ter sucesso em um teste de resistência de Constituição ou sofrerá 1d6 de dano radiante.",
+    niveis: "O dano da magia aumenta em 1d6 quando você alcança o 5° nível (2d6), 11° nível (3d6) e 17° nível (4d6)."
   },
   {
     nome: "Parar o Tempo",
@@ -4820,6 +5194,20 @@ window.MAGIAS = [
     duracao: "Concentração, até 10 minutos",
     texto: "Uma parede cintilante de luz brilhante aparece em um ponto que você escolhe dentro do alcance. A parede aparece em qualquer orientação que você escolher: horizontalmente, verticalmente ou diagonalmente. Ele pode estar flutuando livre ou pode repousar sobre uma superfície sólida. A parede pode ter até 18 metros de comprimento, 3 metros de altura e 1,5 metros de espessura. A parede bloqueia linha de visão, mas as criaturas e os objetos podem passar por ela. Ela emite luz brilhante a 36 metros de distância e luz fraca por mais 36 metros.\n\nQuando a parede aparece, cada criatura em sua área deve fazer um teste de resistência de Constituição. Em um teste falho, uma criatura recebe 4d8 de dano radiante, e é cega por 1 minuto. Em um teste bem-sucedido, leva metade do dano e não é cega. Uma criatura cega pode fazer um teste de resistência de Constituição no final de cada um de seus turnos, terminando o efeito sobre si mesmo em um sucesso.\n\nUma criatura que termina a sua vez na área da parede recebe 4d8 de dano radiante.\n\nAté que a magia termine, você pode usar uma ação para lançar um feixe de brilho da parede para uma criatura que você pode ver dentro de 18 metros dela. Faça um ataque de magia a distância. Em um acerto, o alvo recebe 4d8 de dano radiante. Quer você acerte ou erre, reduza o comprimento da parede em 3 metros. Se o comprimento da parede cair para 0 metros, a magia termina.",
     niveis: "Quando você conjura essa magia usando um espaço de magia de 6° nível ou superior, o dano aumenta em 1d8 para cada nível do espaço de magia acima do 5°."
+  },
+  {
+    nome: "Passeio Cinético",
+    sinonimos: "Kinetic Jaunt",
+    hb: false,
+    nivel: 2,
+    escola: "Transmutação",
+    ritual: false,
+    classes: "Artífice, Bardo, Feiticeiro, Mago",
+    tempo: "1 ação bônus",
+    alcance: "Pessoal",
+    comp: "S",
+    duracao: "Concentração, até 1 minuto",
+    texto: "Você potencializa magicamente o seu movimento com passos semelhantes aos de uma dança, concedendo a si mesmo os seguintes benefícios pela duração:\n\n- Seu deslocamento de caminhada aumenta em 3 metros.\n- Você não provoca ataques de oportunidade.\n- Você pode se mover através do espaço de outra criatura, e isso não conta como terreno difícil. Se você terminar o seu turno no espaço de outra criatura, será empurrado para o último espaço desocupado que ocupou e sofrerá 1d8 de dano de energia."
   },
   {
     nome: "Passo Distante",
@@ -4999,7 +5387,23 @@ window.MAGIAS = [
     alcance: "18 metros",
     comp: "V, S",
     duracao: "Instantânea",
-    texto: "Você faz com que um frio entorpecente se forme em uma criatura que você possa ver, dentro do alcance. O alvo deve realizar um teste de resistência de Constituição. Se falhar na resistência, o alvo sofre 1d6 de dano de frio e tem desvantagem na próxima jogada de ataque com arma que ele fizer antes do final do próximo turno dele.\n\nO dano da magia aumenta em 1d6 quando você alcança o 5° nível (2d6), 11° nível (3d6) e 17° nível (4d6)."
+    texto: "Você faz com que um frio entorpecente se forme em uma criatura que você possa ver, dentro do alcance. O alvo deve realizar um teste de resistência de Constituição. Se falhar na resistência, o alvo sofre 1d6 de dano de frio e tem desvantagem na próxima jogada de ataque com arma que ele fizer antes do final do próximo turno dele.",
+    niveis: "O dano da magia aumenta em 1d6 quando você alcança o 5° nível (2d6), 11° nível (3d6) e 17° nível (4d6)."
+  },
+  {
+    nome: "Picada Debilitante",
+    sinonimos: "Sapping Sting",
+    hb: false,
+    nivel: 0,
+    escola: "Necromancia",
+    ritual: false,
+    classes: "Mago",
+    tempo: "1 ação",
+    alcance: "9 metros",
+    comp: "V, S",
+    duracao: "Instantânea",
+    texto: "Você drena a vitalidade de uma criatura que possa ver dentro do alcance. O alvo deve ser bem-sucedido em um teste de resistência de Constituição ou sofrerá 1d4 de dano necrótico e cairá caído.",
+    niveis: "O dano dessa magia aumenta em 1d4 quando você alcança o 5º nível (2d4), 11º nível (3d4) e 17º nível (4d4)."
   },
   {
     nome: "Pirotecnia",
@@ -5047,7 +5451,7 @@ window.MAGIAS = [
     nivel: 9,
     escola: "Conjuração",
     concentracao: true,
-    classes: "Clérigo, Feiticeiro, Mago",
+    classes: "Bruxo (Opcional), Clérigo, Feiticeiro, Mago",
     tempo: "1 ação",
     alcance: "18 metros",
     comp: "V, S, M (um diamante valendo, no mínimo, 5.000 po)",
@@ -5224,7 +5628,7 @@ window.MAGIAS = [
     nivel: 1,
     escola: "Abjuração",
     concentracao: true,
-    classes: "Bruxo, Clérigo, Mago, Paladino",
+    classes: "Bruxo, Clérigo, Druida (Opcional), Mago, Paladino",
     tempo: "1 ação",
     alcance: "Toque",
     comp: "V, S, M (água benta ou pó de prata e ferro, consumidos pela magia)",
@@ -5284,6 +5688,20 @@ window.MAGIAS = [
     comp: "V, S",
     duracao: "Instantânea",
     texto: "Toda comida e bebida não-mágica dentro de uma esfera de 1,5 metro de raio centrada num ponto, à sua escolha, dentro do alcance é purificada e livrada de venenos ou doenças."
+  },
+  {
+    nome: "Quebra da Realidade",
+    sinonimos: "Reality Break",
+    hb: false,
+    nivel: 8,
+    escola: "Conjuração",
+    ritual: false,
+    classes: "Mago",
+    tempo: "1 ação",
+    alcance: "18 metros",
+    comp: "V, S, M (um prisma de cristal)",
+    duracao: "Concentração, até 1 minuto",
+    texto: "Você estilhaça as barreiras entre realidades e linhas temporais, lançando uma criatura em tumulto e loucura. O alvo deve ser bem-sucedido em um teste de resistência de Sabedoria ou não poderá realizar reações até a magia terminar. O alvo afetado também deve rolar um d10 no início de cada um dos turnos dele; o número rolado determina o que acontece com o alvo, conforme mostrado na tabela Efeitos de Quebra da Realidade.\n\nNo final de cada um dos turnos dele, o alvo afetado pode repetir o teste de resistência de Sabedoria, encerrando a magia em si mesmo se obtiver sucesso.\n\n### Efeitos de Quebra da Realidade\n\n| d10 | Efeito |\n| :---: | :--- |\n| 1-2 | Visão do Reino Distante. O alvo sofre 6d12 de dano psíquico e fica atordoado até o final do turno. |\n| 3-5 | Fenda Dilacerante. O alvo deve fazer um teste de resistência de Destreza, sofrendo 8d12 de dano de energia se falhar no teste, ou metade desse dano se obtiver sucesso. |\n| 6-8 | Buraco de Minhoca. O alvo é teletransportado, juntamente com tudo o que estiver vestindo e carregando, até 9 metros para um espaço desocupado à sua escolha que você possa ver. O alvo também sofre 10d12 de dano de energia e fica caído. |\n| 9-10 | Frio do Vazio Sombrio. O alvo sofre 10d12 de dano de frio e fica cego até o final do turno. |"
   },
   {
     nome: "Queda Suave",
@@ -5380,7 +5798,8 @@ window.MAGIAS = [
     alcance: "36 metros",
     comp: "V, S",
     duracao: "Instantânea",
-    texto: "Você arremessa um cisco de fogo em uma criatura ou objeto dentro do alcance. Faça um ataque à distância com magia contra o alvo. Se atingir, o alvo sofre 1d10 de dano de fogo. Um objeto inflamável atingido por essa magia incendeia se não estiver sendo vestido ou carregado.\n\nO dano dessa magia aumenta em 1d10 quando você alcança o 5° nível (2d10), 11° nível (3d10) e 17° nível (4d10)."
+    texto: "Você arremessa um cisco de fogo em uma criatura ou objeto dentro do alcance. Faça um ataque à distância com magia contra o alvo. Se atingir, o alvo sofre 1d10 de dano de fogo. Um objeto inflamável atingido por essa magia incendeia se não estiver sendo vestido ou carregado.",
+    niveis: "O dano dessa magia aumenta em 1d10 quando você alcança o 5° nível (2d10), 11° nível (3d10) e 17° nível (4d10)."
   },
   {
     nome: "Raio de Gelo",
@@ -5393,7 +5812,8 @@ window.MAGIAS = [
     alcance: "18 metros",
     comp: "V, S",
     duracao: "Instantânea",
-    texto: "Um raio frígido de luz azul clara parte em direção de uma criatura, dentro do alcance. Realize um ataque à distância com magia contra o alvo. Se atingir, ele sofre 1d8 de dano de frio e seu deslocamento é reduzido em 3 metros até o começo do seu próximo turno.\n\nO dano da magia aumenta em 1d8 quando você alcança o 5° nível (2d8), 11° nível (3d8) e 17° nível (4d8)."
+    texto: "Um raio frígido de luz azul clara parte em direção de uma criatura, dentro do alcance. Realize um ataque à distância com magia contra o alvo. Se atingir, ele sofre 1d8 de dano de frio e seu deslocamento é reduzido em 3 metros até o começo do seu próximo turno.",
+    niveis: "O dano da magia aumenta em 1d8 quando você alcança o 5° nível (2d8), 11° nível (3d8) e 17° nível (4d8)."
   },
   {
     nome: "Raio do Enfraquecimento",
@@ -5445,7 +5865,7 @@ window.MAGIAS = [
     nivel: 6,
     escola: "Evocação",
     concentracao: true,
-    classes: "Druida, Feiticeiro, Mago",
+    classes: "Clérigo (Opcional), Druida, Feiticeiro, Mago",
     tempo: "1 ação",
     alcance: "Pessoal (linha de 18 metros)",
     comp: "V, S, M (uma lente de aumento)",
@@ -5463,7 +5883,8 @@ window.MAGIAS = [
     alcance: "3 metros",
     comp: "V, S",
     duracao: "Instantânea",
-    texto: "Você ergue sua mão em direção de uma criatura que você possa ver, dentro do alcance e projeta um sopro de gás tóxico da sua palma. A criatura deve ser bem sucedida num teste de resistência de Constituição ou sofrerá 1d12 de dano de veneno.\n\nO dano dessa magia aumenta em 1d12 quando você alcança o 5° nível (2d12), 11° nível (3d12) e 17° nível (4d12)."
+    texto: "Você ergue sua mão em direção de uma criatura que você possa ver, dentro do alcance e projeta um sopro de gás tóxico da sua palma. A criatura deve ser bem sucedida num teste de resistência de Constituição ou sofrerá 1d12 de dano de veneno.",
+    niveis: "O dano dessa magia aumenta em 1d12 quando você alcança o 5° nível (2d12), 11° nível (3d12) e 17° nível (4d12)."
   },
   {
     nome: "Rajada Mística",
@@ -5551,7 +5972,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 2,
     escola: "Ilusão",
-    classes: "Bruxo, Feiticeiro, Mago",
+    classes: "Bardo (Opcional), Bruxo, Feiticeiro, Mago",
     tempo: "1 ação",
     alcance: "Pessoal",
     comp: "V, S",
@@ -5605,7 +6026,7 @@ window.MAGIAS = [
     nivel: 2,
     escola: "Necromancia",
     ritual: true,
-    classes: "Clérigo, Mago",
+    classes: "Clérigo, Mago, Paladino (Opcional)",
     tempo: "1 ação",
     alcance: "Toque",
     comp: "V, S, M (uma pitada de sal e uma peça de cobre colocada em cada um dos olhos do corpo, que devem permanecer aí pela duração)",
@@ -5700,7 +6121,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 5,
     escola: "Abjuração",
-    classes: "Bardo, Clérigo, Druida",
+    classes: "Artífice, Bardo, Clérigo, Druida, Patrulheiro (Opcional)",
     tempo: "1 ação",
     alcance: "Toque",
     comp: "V, S, M (pó de diamante valendo, no mínimo, 100 po, consumido pela magia)",
@@ -5739,7 +6160,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 3,
     escola: "Necromancia",
-    classes: "Clérigo, Paladino",
+    classes: "Artífice, Clérigo, Druida (Opcional), Paladino, Patrulheiro (Opcional)",
     tempo: "1 ação",
     alcance: "Toque",
     comp: "V, S, M (um diamante no valor de 300 po, consumido pela magia)",
@@ -5839,7 +6260,8 @@ window.MAGIAS = [
     alcance: "Pessoal",
     comp: "S",
     duracao: "Instantânea",
-    texto: "Você canaliza magia primitiva para fazer com que seus dentes ou unhas se agucem, prontos para realizar um ataque corrosivo. Faça um ataque corpo-a-corpo com magia contra uma criatura dentro de 1,5 metros de você. Em um acerto, o alvo recebe 1d10 de dano de ácido. Após você fazer o ataque, seus dentes ou unhas retornam ao normal.\n\nO dano da magia aumenta em 1d10 quando você alcança o 5° nível (2d10), 11° nível (3d10) e 17° nível (4d10)."
+    texto: "Você canaliza magia primitiva para fazer com que seus dentes ou unhas se agucem, prontos para realizar um ataque corrosivo. Faça um ataque corpo-a-corpo com magia contra uma criatura dentro de 1,5 metros de você. Em um acerto, o alvo recebe 1d10 de dano de ácido. Após você fazer o ataque, seus dentes ou unhas retornam ao normal.",
+    niveis: "O dano da magia aumenta em 1d10 quando você alcança o 5° nível (2d10), 11° nível (3d10) e 17° nível (4d10)."
   },
   {
     nome: "Semiplano",
@@ -5847,7 +6269,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 8,
     escola: "Conjuração",
-    classes: "Bruxo, Mago",
+    classes: "Bruxo, Feiticeiro (Opcional), Mago",
     tempo: "1 ação",
     alcance: "18 metros",
     comp: "V",
@@ -5917,7 +6339,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 7,
     escola: "Abjuração",
-    classes: "Bardo, Clérigo, Mago",
+    classes: "Bardo, Clérigo, Druida (Opcional), Mago",
     tempo: "1 minuto",
     alcance: "Toque",
     comp: "V, S, M (mercúrio, fósforo e pó de diamante e opala, com um valor total de, no mínimo, 1.000 po, consumidos pela magia)",
@@ -5975,7 +6397,8 @@ window.MAGIAS = [
     alcance: "18 metros",
     comp: "V, S",
     duracao: "Instantânea",
-    texto: "Você aponta para uma criatura que você pode ver dentro do alcance, e o som de um sino doloroso preenche o ar ao redor dele por um momento. O alvo deve ser bem sucedido em um teste de resistência de Sabedoria ou sofre 1d8 de dano necrótico. Se ao alvo estiver faltando qualquer um de seus pontos de vida, ele recebe 1d12 de dano necrótico em vez disso.\n\nO dano da magia aumenta em um dado quando você alcança o 5° nível (2d8 ou 2d12), 11° nível (3d8 ou 3d12) e 17° nível (4d8 ou 4d12)."
+    texto: "Você aponta para uma criatura que você pode ver dentro do alcance, e o som de um sino doloroso preenche o ar ao redor dele por um momento. O alvo deve ser bem sucedido em um teste de resistência de Sabedoria ou sofre 1d8 de dano necrótico. Se ao alvo estiver faltando qualquer um de seus pontos de vida, ele recebe 1d12 de dano necrótico em vez disso.",
+    niveis: "O dano da magia aumenta em um dado quando você alcança o 5° nível (2d8 ou 2d12), 11° nível (3d8 ou 3d12) e 17° nível (4d8 ou 4d12)."
   },
   {
     nome: "Sombra de Transtorno",
@@ -6024,7 +6447,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 7,
     escola: "Conjuração",
-    classes: "Bardo, Mago",
+    classes: "Bardo (Opcional), Bruxo (Opcional), Feiticeiro (Opcional), Mago (Opcional)",
     tempo: "10 minutos",
     alcance: "6 metros",
     comp: "V, S, M (um item mágico ou criatura voluntária originária do mundo de destino)",
@@ -6074,6 +6497,21 @@ window.MAGIAS = [
     niveis: "Quando você conjurar essa magia usando um espaço de magia de 7° nível, a duração será de 10 dias. Quando você usar um espaço de magia de 8° nível, a duração será de 30 dias. Quando você usar um espaço de magia de 9° nível, a duração será de 1 ano e 1 dia."
   },
   {
+    nome: "Sumidouro Gravitacional",
+    sinonimos: "Gravity Sinkhole",
+    hb: false,
+    nivel: 4,
+    escola: "Evocação",
+    ritual: false,
+    classes: "Mago",
+    tempo: "1 ação",
+    alcance: "36 metros",
+    comp: "V, S, M (uma bolinha de gude preta)",
+    duracao: "Instantânea",
+    texto: "Uma esfera de 6 metros de raio de força esmagadora se forma em um ponto que você possa ver dentro do alcance e puxa as criaturas ali presentes. Cada criatura na esfera deve fazer um teste de resistência de Constituição. Se falhar no teste, a criatura sofre 5d10 de dano de energia e é puxada em linha reta em direção ao centro da esfera, terminando em um espaço desocupado o mais próximo possível do centro (mesmo que esse espaço esteja no ar). Se obtiver sucesso, a criatura sofre metade desse dano e não é puxada.",
+    niveis: "Quando você conjurar essa magia usando um espaço de magia de 5º nível ou superior, o dano aumenta em 1d10 para cada nível do espaço acima do 4º."
+  },
+  {
     nome: "Sussurros Dissonantes",
     sinonimos: "Dissonant Whispers",
     hb: false,
@@ -6093,12 +6531,13 @@ window.MAGIAS = [
     hb: false,
     nivel: 0,
     escola: "Encantamento",
-    classes: "Feiticeiro, Bruxo, Mago",
+    classes: "Feiticeiro (Opcional), Bruxo (Opcional), Mago (Opcional)",
     tempo: "1 ação",
     alcance: "18 metros",
     comp: "V",
     duracao: "1 rodada",
-    texto: "Você desfere um pico desorientador de energia psíquica na mente de uma criatura à sua vista e dentro do alcance. O alvo deve ser bem-sucedido em uma salvaguarda de Inteligência ou sofrerá 1d6 pontos de dano psíquico e deverá subtrair 1d4 da próxima salvaguarda realizada antes do final de seu próximo turno.\n\nO dano desta magia aumenta em 1d6 quando você atinge certos níveis: 5º nível (2d6), 11º nível (3d6) e 17º nível (4d6)."
+    texto: "Você desfere um pico desorientador de energia psíquica na mente de uma criatura à sua vista e dentro do alcance. O alvo deve ser bem-sucedido em uma salvaguarda de Inteligência ou sofrerá 1d6 pontos de dano psíquico e deverá subtrair 1d4 da próxima salvaguarda realizada antes do final de seu próximo turno.",
+    niveis: "O dano desta magia aumenta em 1d6 quando você atinge certos níveis: 5º nível (2d6), 11º nível (3d6) e 17º nível (4d6)."
   },
   {
     nome: "Taumaturgia",
@@ -6287,7 +6726,8 @@ window.MAGIAS = [
     alcance: "36 metros",
     comp: "V, S",
     duracao: "1 rodada",
-    texto: "Você cria uma mão esquelética fantasmagórica no espaço de uma criatura, dentro do alcance. Realize um ataque à distância com magia contra a criatura para afetá-la com o frio sepulcral. Se atingir, a criatura sofre 1d8 de dano necrótico e não poderá recuperar pontos de vida até o início do seu próximo turno. Até lá, a mão ficará presa ao alvo.\n\nSe você atingir um alvo morto-vivo, ele terá desvantagem nas jogadas de ataque contra você até o final do seu próximo turno.\n\nO dano dessa magia aumenta em 1d8 quando você alcança o 5° nível (2d8), 11° nível (3d8) e 17° nível (4d8)."
+    texto: "Você cria uma mão esquelética fantasmagórica no espaço de uma criatura, dentro do alcance. Realize um ataque à distância com magia contra a criatura para afetá-la com o frio sepulcral. Se atingir, a criatura sofre 1d8 de dano necrótico e não poderá recuperar pontos de vida até o início do seu próximo turno. Até lá, a mão ficará presa ao alvo.\n\nSe você atingir um alvo morto-vivo, ele terá desvantagem nas jogadas de ataque contra você até o final do seu próximo turno.",
+    niveis: "O dano dessa magia aumenta em 1d8 quando você alcança o 5° nível (2d8), 11° nível (3d8) e 17° nível (4d8)."
   },
   {
     nome: "Toque Chocante",
@@ -6300,7 +6740,8 @@ window.MAGIAS = [
     alcance: "Toque",
     comp: "V, S",
     duracao: "Instantânea",
-    texto: "Eletricidade surge da sua mão para transmitir um choque em uma criatura que você tentar tocar. Faça um ataque corpo-a-corpo com magia contra o alvo. Você tem vantagem na jogada de ataque se o alvo estiver vestindo qualquer armadura de metal. Se atingir, o alvo sofre 1d8 de dano elétrico e não pode usar reações até o início do próximo turno dele.\n\nO dano da magia aumenta em 1d8 quando você alcança o 5° nível (2d8), 11° nível (3d8) e 17° nível (4d8)."
+    texto: "Eletricidade surge da sua mão para transmitir um choque em uma criatura que você tentar tocar. Faça um ataque corpo-a-corpo com magia contra o alvo. Você tem vantagem na jogada de ataque se o alvo estiver vestindo qualquer armadura de metal. Se atingir, o alvo sofre 1d8 de dano elétrico e não pode usar reações até o início do próximo turno dele.",
+    niveis: "O dano da magia aumenta em 1d8 quando você alcança o 5° nível (2d8), 11° nível (3d8) e 17° nível (4d8)."
   },
   {
     nome: "Toque Vampírico",
@@ -6309,13 +6750,28 @@ window.MAGIAS = [
     nivel: 3,
     escola: "Necromancia",
     concentracao: true,
-    classes: "Bruxo, Mago",
+    classes: "Bruxo, Feiticeiro (Opcional), Mago",
     tempo: "1 ação",
     alcance: "Pessoal",
     comp: "V, S",
     duracao: "Concentração, até 1 minuto",
     texto: "O toque da sua mão coberta de sombras pode drenar a força vital dos outros para curar seus ferimentos. Realize um ataque corpo-a-corpo com magia contra uma criatura ao seu alcance. Se atingir, o alvo sofre 3d6 de dano necrótico e você recupera pontos de vida igual à metade do dano necrótico causado. Até a magia acabar, você pode realizar o ataque novamente, no seu turno, com uma ação.",
     niveis: "Quando você conjurar essa magia usando um espaço de magia de 4° nível ou superior, o dano aumenta em 1d6 para cada nível do espaço acima do 3°."
+  },
+  {
+    nome: "Torre de Galder",
+    sinonimos: "Galder's Tower",
+    hb: false,
+    nivel: 3,
+    escola: "Conjuração",
+    ritual: false,
+    classes: "Mago",
+    tempo: "10 minutos",
+    alcance: "9 metros",
+    comp: "V, S, M (um fragmento de pedra, madeira ou outro material de construção)",
+    duracao: "24 horas",
+    texto: "Você conjura uma torre de dois andares feita de pedra, madeira ou materiais semelhantes adequadamente resistentes. A torre pode ter formato redondo ou quadrado. Cada andar da torre tem 3 metros de altura e uma área de até 9 metros quadrados. O acesso entre os andares consiste em uma escada simples e um alçapão. Cada andar assume uma das seguintes formas, escolhidas por você ao conjurar a magia:\n\n- Um quarto com uma cama, cadeiras, baú e lareira mágica\n- Um escritório com escrivaninhas, livros, estantes, pergaminhos, tinta e canetas tinteiro\n- Uma sala de jantar com uma mesa, cadeiras, lareira mágica, recipientes e utensílios de cozinha\n- Um salão de estar com sofás, poltronas, mesas laterais e banquinhos para os pés\n- Um banheiro com latrinas, tinas de banho, um braseiro mágico e bancos de sauna\n- Um observatório com um telescópio e mapas do céu noturno\n- Uma sala vazia e sem mobília\n\nO interior da torre é quente e seco, independentemente das condições externas. Qualquer equipamento ou mobília conjurada com a torre se dissipa em fumaça se for removida dela. Ao final da duração da magia, todas as criaturas e objetos dentro da torre que não foram criados pela magia aparecem em segurança do lado de fora, no chão, e todos os vestígios da torre e de sua mobília desaparecem.\n\nVocê pode conjurar essa magia novamente enquanto ela estiver ativa para manter a existência da torre por mais 24 horas. Você pode criar uma torre permanente conjurando essa magia no mesmo local e com a mesma configuração todos os dias durante um ano.",
+    niveis: "Quando você conjurar essa magia usando um espaço de magia de 4º nível ou superior, a torre pode ter um andar adicional para cada nível do espaço acima do 3º."
   },
   {
     nome: "Tranca Arcana",
@@ -6427,6 +6883,20 @@ window.MAGIAS = [
     texto: "Você cria uma esfera de 6 metros de raio de ventos destrutivos centrada num ponto que você possa ver, dentro do alcance. Pela duração da magia, a esfera enche a área com chuva gelada e ventos uivantes. A área é de escuridão leve e qualquer criatura dentro dela tem desvantagem em testes de Sabedoria (Percepção) feitos para ouvir e jogadas de ataque à distância com arma são impossíveis dentro ou através da esfera.\n\nQuando uma criatura entrar na área pela primeira vez em um turno ou começar seu turno lá, ela deve realizar um teste de resistência de Constituição. Se falhar na resistência, a criatura sofre 2d6 de dano de concussão e fica surda até o início do próximo turno dela.\n\nCada 1,5 metros que uma criatura se mover na área custa 3 metros de movimento."
   },
   {
+    nome: "Vazio Voraz",
+    sinonimos: "Ravenous Void",
+    hb: false,
+    nivel: 9,
+    escola: "Evocação",
+    ritual: false,
+    classes: "Mago",
+    tempo: "1 ação",
+    alcance: "300 metros",
+    comp: "V, S, M (uma pequena estrela de nove pontas feita de ferro)",
+    duracao: "Concentração, até 1 minuto",
+    texto: "Você cria uma esfera de 6 metros de raio de força gravitacional destrutiva centrada em um ponto que você possa ver dentro do alcance. Pela duração da magia, a esfera e qualquer espaço a até 30 metros dela são terreno difícil, e objetos não mágicos totalmente dentro da esfera são destruídos se não estiverem sendo vestidos ou carregados.\n\nQuando a esfera aparece e no início de cada um dos seus turnos até a magia terminar, objetos soltos a até 30 metros da esfera são puxados em direção ao centro da esfera, terminando em um espaço desocupado o mais próximo possível do centro.\n\nUma criatura que começar seu turno a até 30 metros da esfera deve ser bem-sucedida em um teste de resistência de Força ou será puxada em linha reta em direção ao centro da esfera, terminando em um espaço desocupado o mais próximo possível do centro. Uma criatura que entrar na esfera pela primeira vez em um turno ou começar seu turno ali sofre 5d10 de dano de energia e fica impedida até não estar mais na esfera. Se a esfera estiver no ar, a criatura impedida paira dentro da esfera. Uma criatura pode usar sua ação para fazer um teste de Força contra a CD para evitar suas magias, encerrando essa condição impedida em si mesma ou em outra criatura na esfera que ela possa alcançar. Uma criatura reduzida a 0 pontos de vida por essa magia é aniquilada, juntamente com quaisquer itens não mágicos que ela esteja vestindo ou carregando."
+  },
+  {
     nome: "Velocidade",
     sinonimos: "Haste",
     hb: false,
@@ -6495,6 +6965,20 @@ window.MAGIAS = [
     texto: "Você pode ver e ouvir uma criatura em particular, à sua escolha, que esteja no mesmo plano de existência que você. O alvo deve realizar um teste de resistência de Sabedoria, que é modificado de acordo com o quão bem você conhece o alvo e o tipo de conexão física que você tem com ele. Se um alvo souber que você está conjurando essa magia, ele pode falhar no teste de resistência voluntariamente, se ele quiser ser observado.\n\nCom um sucesso na resistência, o alvo não é afetado e você não pode usar essa magia contra ele novamente por 24 horas.\n\nSe falhar na resistência, a magia cria um sensor invisível a até 3 metros do alvo. Você pode ver e ouvir através do sensor, como se você estivesse onde ele está. O sensor se move com o alvo, permanecendo a 3 metros dele pela duração. Uma criatura que puder ver objetos invisíveis verá o sensor como um globo luminoso do tamanho de um punho.\n\nAo invés de focar em uma criatura, você pode escolher um local que você já tenha visto antes como alvo dessa magia. Quando fizer isso, o sensor aparece no local e não se move.\n\n| Conhecimento | Modificador de Resistência |\n|---|---|\n| Segunda mão (você ouviu falar do alvo) | +5 |\n| Primeira mão (você foi apresentado ao alvo) | +0 |\n| Familiar (você conhece bem o alvo) | –5 |\n\n| Conexão | Modificador de Resistência |\n|---|---|\n| Descrição ou foto | –2 |\n| Pertences ou roupas | –4 |\n| Parte do corpo, mecha de cabelo, recorte de unha ou simular | –10 |"
   },
   {
+    nome: "Vincular Essência",
+    sinonimos: "Tether Essence",
+    hb: false,
+    nivel: 7,
+    escola: "Necromancia",
+    ritual: false,
+    classes: "Mago",
+    tempo: "1 ação",
+    alcance: "18 metros",
+    comp: "V, S, M (um carretel de cordão de platina que valha no mínimo 250 po, que a magia consome)",
+    duracao: "Concentração, até 1 hora",
+    texto: "Duas criaturas que você possa ver dentro do alcance devem fazer um teste de resistência de Constituição, com desvantagem se estiverem a até 9 metros uma da outra. Qualquer uma das criaturas pode escolher falhar voluntariamente no teste. Se qualquer um dos testes obtiver sucesso, a magia não tem efeito. Se ambos os testes falharem, as criaturas ficam magicamente vinculadas pela duração, independentemente da distância entre elas. Quando dano é causado a uma delas, o mesmo dano é causado à outra. Se pontos de vida forem restaurados a uma delas, o mesmo número de pontos de vida é restaurado à outra. Se qualquer uma das criaturas vinculadas for reduzida a 0 pontos de vida, a magia termina em ambas. Se a magia terminar em uma criatura, ela termina em ambas."
+  },
+  {
     nome: "Vínculo com a Besta",
     sinonimos: "Beast Bond",
     hb: false,
@@ -6514,7 +6998,7 @@ window.MAGIAS = [
     hb: false,
     nivel: 2,
     escola: "Abjuração",
-    classes: "Clérigo",
+    classes: "Clérigo, Paladino (Opcional)",
     tempo: "1 ação",
     alcance: "Toque",
     comp: "V, S, M (um par de anéis de platina valendo, no mínimo, 50 po cada, que você e o alvo devem usar pela duração)",
@@ -6601,7 +7085,8 @@ window.MAGIAS = [
     alcance: "18 metros",
     comp: "V",
     duracao: "Instantânea",
-    texto: "Você libera uma série de insultos atados com encantamentos sutis numa criatura que você possa ver, dentro do alcance. Se o alvo puder ouvir você (apesar de não precisar compreendê-lo), ele deve ser bem sucedido num teste de resistência de Sabedoria ou sofrerá 1d4 de dano psíquico e terá desvantagem na próxima jogada de ataque que ele fizer antes do final do próximo turno dele.\n\nO dano dessa magia aumenta em 1d4 quando você alcança o 5° nível (2d4), 11° nível (3d4) e 17° nível (4d4)."
+    texto: "Você libera uma série de insultos atados com encantamentos sutis numa criatura que você possa ver, dentro do alcance. Se o alvo puder ouvir você (apesar de não precisar compreendê-lo), ele deve ser bem sucedido num teste de resistência de Sabedoria ou sofrerá 1d4 de dano psíquico e terá desvantagem na próxima jogada de ataque que ele fizer antes do final do próximo turno dele.",
+    niveis: "O dano dessa magia aumenta em 1d4 quando você alcança o 5° nível (2d4), 11° nível (3d4) e 17° nível (4d4)."
   },
   {
     nome: "Zona da Verdade",
